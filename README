@@ -1,0 +1,33 @@
+# Group 10 (Group Members)
+------------------------
+1) Azreen Shafieqah binti Asri (74251)
+2) Mohammad Hamka Izzudin bin  Mohammad Yahya (73571)
+3) Mohammad Amir Alam bin Rahim Omar (73563)
+4) Nurulain Basirah binti Hamid (73779)
+5) Iman Tarmizi Rosalina (73496) 
+
+
+User Manual for Smart Health Consulting System
+----------------------------------------------
+  1. All.cpp and.h files will be compiled using Smart Health Consulting System.dev.
+  2. In order for the application to run, all of the files must be in the same folder.
+  3. The text file "PatientRegsitration.txt" contains the preset data for the patient class and if you wish login using other username and password you may make changes to the txt file.
+  4. The header file "bool.h" is used to check the format of information.
+  5. To execute the programme, the language standard in the Dev-C++ application should be changed to GNU C++ 11 since the software makes use of the #includeregex> file.
+
+How to change language standard in Dev-C++?
+---------------------------------------------
+  1. Open Project (1st step) 
+  2. Project Options (2nd step)
+  3. Settings (3rd step)
+  4. Code Generation (4th step)
+  5. Language standard (5th step) 
+  6. Choose GNU C++ 11 and apply (6th step)
+
+Preset username and password for:
+----------------------------------------
+   1. Doctor: - Username ---> PDC1365
+              - Password ---> 74251
+
+   2. Hospital Administrator: - Username ---> ain2022 
+                              - Password ---> 73779
