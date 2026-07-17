@@ -1,9 +1,7 @@
-
 /*
  * Appointment Class Implementation
  * Smart Health Consulting System
  */
-
 
 #include <iostream>
 #include <string>
@@ -108,8 +106,6 @@ string Appointment::getAppointmentSpecialization()
 /*
  * Appointment Menu
  */
-
-
 void Appointment::appMenu()
 {
 
@@ -405,30 +401,19 @@ void Appointment::removeAppointment()
 }
 
 
-
-
-
-
-
 /*
  * Edit Appointment
  */
-
-
 void Appointment::editAppointment()
 {
 
     string searchID;
-
-
 
     cout
     << "\nEnter Appointment ID to edit: ";
 
     cin
     >> searchID;
-
-
 
     ifstream appointmentFile(
         "data/Appointment.txt"
@@ -516,15 +501,10 @@ void Appointment::editAppointment()
                 AppointmentSpecialization
             );
 
-
             records[i+1] = AppointmentDate;
-
             records[i+2] = AppointmentTime;
-
             records[i+3] = AppointmentIllness;
-
             records[i+4] = AppointmentDoctor;
-
             records[i+5] = AppointmentSpecialization;
 
             break;
@@ -533,18 +513,14 @@ void Appointment::editAppointment()
 
     }
 
-
     if(!found)
     {
-
         cout
         << "\nAppointment ID not found.";
 
         system("pause");
         return;
-
     }
-
 
     ofstream updateFile(
         "data/Appointment.txt",
@@ -573,8 +549,6 @@ void Appointment::editAppointment()
 /*
  * View Appointment
  */
-
-
 void Appointment::viewAppointment()
 {
 
@@ -584,7 +558,6 @@ void Appointment::viewAppointment()
 
     if(!appointmentFile)
     {
-
         cout
         << "\nNo appointment record found.";
 
@@ -694,18 +667,16 @@ void Appointment::viewAppointment()
 
 }
 
+
 /*
  * Payment Process
  */
-
-
 void Appointment::payment()
 {
 
     ifstream appointmentFile(
         "data/Appointment.txt"
     );
-
 
 
     if(!appointmentFile)
