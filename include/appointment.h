@@ -4,9 +4,7 @@
 #include <iostream>
 #include <string>
 
-
 using namespace std;
-
 
 class Appointment
 {
@@ -25,7 +23,6 @@ public:
 
     Appointment();
 
-
     void setAppointmentID(string);
     void setAppointmentDate(string);
     void setAppointmentTime(string);
@@ -33,14 +30,12 @@ public:
     void setAppointmentDoctor(string);
     void setAppointmentSpecialization(string);
 
-
     string getAppointmentID();
     string getAppointmentDate();
     string getAppointmentTime();
     string getAppointmentIllness();
     string getAppointmentDoctor();
     string getAppointmentSpecialization();
-
 
     void appMenu();
     void addAppointment();
