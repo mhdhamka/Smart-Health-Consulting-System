@@ -1,7 +1,3 @@
-/**********
-Class Hospital
-Implemented by Nurulain Basirah Binti Hamid (73779)
-**********/
 
 /*Class Hospital header file*/
 #ifndef HOSPITAL_H
