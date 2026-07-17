@@ -3,7 +3,6 @@
  * Smart Health Consulting System
  */
 
-
 #include <iostream>
 #include <string>
 #include <fstream>
@@ -13,9 +12,7 @@
 using namespace std;
 
 
-
 // Constructor
-
 Payment::Payment()
 {
     paymentAppointmentID = "";
@@ -28,9 +25,7 @@ Payment::Payment()
 }
 
 
-
 // Setter functions
-
 void Payment::setPaymentAppointmentID(string aid)
 {
     paymentAppointmentID = aid;
@@ -152,47 +147,38 @@ void Payment::makePayment()
         return;
     }
 
-
-
     cout << "\n=====================================================\n";
     cout << "          SMART HEALTH CONSULTING SYSTEM\n";
     cout << "----------------------Payment------------------------\n";
 
 
-
     /*
        Read appointment details
     */
-
     getline(
         appointmentFile,
         paymentAppointmentID
     );
-
 
     getline(
         appointmentFile,
         paymentDate
     );
 
-
     getline(
         appointmentFile,
         paymentTime
     );
-
 
     getline(
         appointmentFile,
         paymentIllness
     );
 
-
     getline(
         appointmentFile,
         paymentDoctor
     );
-
 
     getline(
         appointmentFile,
@@ -200,54 +186,41 @@ void Payment::makePayment()
     );
 
 
-
     // Fixed appointment price
-
     paymentTotalPrice = 100.00;
-
-
 
     cout
     << "\nAppointment ID      : "
     << paymentAppointmentID;
 
-
     cout
     << "\nAppointment Date    : "
     << paymentDate;
-
 
     cout
     << "\nAppointment Time    : "
     << paymentTime;
 
-
     cout
     << "\nIllness             : "
     << paymentIllness;
-
 
     cout
     << "\nDoctor              : "
     << paymentDoctor;
 
-
     cout
     << "\nSpecialization      : "
     << paymentSpecialization;
-
 
     cout
     << "\nTotal Payment       : RM"
     << paymentTotalPrice;
 
 
-
     /*
        Save payment record
     */
-
-
     paymentFile
     << paymentAppointmentID << endl
     << paymentDate << endl
@@ -256,23 +229,16 @@ void Payment::makePayment()
     << paymentDoctor << endl
     << paymentSpecialization << endl
     << paymentTotalPrice << endl
+
     << endl;
 
-
-
     appointmentFile.close();
-
     paymentFile.close();
-
-
 
     cout
     << "\n\nPayment completed successfully.";
 
 }
-
-
-
 
 
 /*
@@ -295,43 +261,27 @@ void Payment::viewPayment()
         return;
     }
 
-
-
     string line;
-
-
 
     cout << "\n=====================================================\n";
     cout << "          SMART HEALTH CONSULTING SYSTEM\n";
     cout << "--------------------Payment List---------------------\n";
 
-
-
     int count = 1;
-
-
 
     while(getline(paymentFile, paymentAppointmentID))
     {
-
 
         if(paymentAppointmentID.empty())
         {
             continue;
         }
 
-
-
         getline(paymentFile,paymentDate);
-
         getline(paymentFile,paymentTime);
-
         getline(paymentFile,paymentIllness);
-
         getline(paymentFile,paymentDoctor);
-
         getline(paymentFile,paymentSpecialization);
-
 
 
         string price;
@@ -351,42 +301,35 @@ void Payment::viewPayment()
         << paymentAppointmentID
         << endl;
 
-
         cout
         << "Date           : "
         << paymentDate
         << endl;
-
 
         cout
         << "Time           : "
         << paymentTime
         << endl;
 
-
         cout
         << "Illness        : "
         << paymentIllness
         << endl;
-
 
         cout
         << "Doctor         : "
         << paymentDoctor
         << endl;
 
-
         cout
         << "Specialization : "
         << paymentSpecialization
         << endl;
 
-
         cout
         << "Amount         : RM"
         << price
         << endl;
-
 
         cout
         << "-------------------------------------\n";
