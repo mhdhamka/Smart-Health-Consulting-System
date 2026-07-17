@@ -1,7 +1,6 @@
 #ifndef RECORD_H
 #define RECORD_H
 
-#include <iostream>
 #include <string>
 
 using namespace std;
@@ -31,6 +30,12 @@ public:
 
     Record();
 
+
+    void addRecord();
+    void viewRecord();
+    void viewpatientRecord();
+    void editRecord();       
+    void removeRecord();     
 
     void setpatientID(string);
     void setpatientName(string);
@@ -62,18 +67,7 @@ public:
     string getdiagnosis();
 
 
-
-    void addRecord();
-    void removeRecord();
-    void editRecord();
-
-    void viewRecord();
-    void viewpatientRecord();
-
 };
-
-
-bool checkExistpatientID(const string& patientID);
 
 
 #endif
