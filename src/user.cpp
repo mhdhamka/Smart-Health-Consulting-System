@@ -3,7 +3,6 @@
  * Smart Health Consulting System
  */
 
-
 #include <iostream>
 #include <string>
 #include <fstream>
@@ -11,8 +10,6 @@
 #include "user.h"
 
 using namespace std;
-
-
 
 // Constructor
 User::User()
@@ -23,20 +20,16 @@ User::User()
 }
 
 
-
 // Setter functions
-
 void User::setname(string name)
 {
     username = name;
 }
 
-
 void User::setpassword(string p)
 {
     password = p;
 }
-
 
 void User::setemail(string e)
 {
@@ -46,26 +39,20 @@ void User::setemail(string e)
 
 
 // Getter functions
-
 string User::getname()
 {
     return username;
 }
-
 
 string User::getpassword()
 {
     return password;
 }
 
-
 string User::getemail()
 {
     return email;
 }
-
-
-
 
 /*
  * Function:
@@ -95,13 +82,9 @@ bool User::validateLogin(string name, string pass)
         return false;
     }
 
-
-
     string fileUsername;
     string filePassword;
     string fileEmail;
-
-
 
     while(getline(patientFile, fileUsername))
     {
@@ -109,8 +92,6 @@ bool User::validateLogin(string name, string pass)
         getline(patientFile, filePassword);
 
         getline(patientFile, fileEmail);
-
-
 
         if(fileUsername == name &&
            filePassword == pass)
@@ -124,11 +105,7 @@ bool User::validateLogin(string name, string pass)
 
     }
 
-
-
     patientFile.close();
-
-
     return false;
 
 }
