@@ -21,7 +21,7 @@ Hospital::Hospital()
     username = "Marc Cucurella";
     password = "10024";
 
-    hospitalName = "Nurulain Basirah";
+    hospitalName = "Green Valley Medical Centre";
 
 
     receiptID = "";
