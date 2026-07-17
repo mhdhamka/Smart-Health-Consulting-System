@@ -1,0 +1,28 @@
+hamka01
+12345
+PAT001
+Mohammad Hamka
+20
+Kuching Sarawak
+hamka@gmail.com
+0123456789
+No previous medical history
+
+amir01
+54321
+PAT002
+Amir Alam
+24
+Samarahan Sarawak
+amir@gmail.com
+01122334455
+Asthma
+
+faiz01
+67890
+Faizatul Fitri
+22
+Kota Samarahan
+faizatul@gmail.com
+0134567890
+Allergy
