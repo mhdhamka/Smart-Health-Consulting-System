@@ -1,0 +1,48 @@
+APP01
+05/01/2026
+0900
+Fever and headache
+Jude Bellingham
+ORT
+
+APP02
+06/01/2026
+1000
+Chest pain consultation
+Kylian Mbappe
+CAR
+
+APP03
+07/01/2026
+1100
+Skin allergy
+Erling Haaland
+DER
+
+APP04
+08/01/2026
+1300
+Child health checkup
+Vinicius Junior
+PED
+
+APP05
+09/01/2026
+1400
+Ear infection
+Jamal Musiala
+ENT
+
+APP06
+10/01/2026
+1500
+Migraine problem
+Lamine Yamal
+NEU
+
+APP07
+11/01/2026
+1600
+General health check
+Cole Palmer
+GEN
