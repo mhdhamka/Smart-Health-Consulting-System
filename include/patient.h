@@ -27,8 +27,6 @@ public:
 
     Patient();
 
-
-    // Setter
     void setpatientID(string);
     void setpatientName(string);
     void setpatientAge(string);
@@ -36,8 +34,6 @@ public:
     void setphone(string);
     void setmedicalHistory(string);
 
-
-    // Getter
     string getpatientID();
     string getpatientName();
     string getpatientAge();
@@ -45,8 +41,6 @@ public:
     string getphone();
     string getmedicalHistory();
 
-
-    // Functions
     void registration();
     void login();
     void patientPlatform();
