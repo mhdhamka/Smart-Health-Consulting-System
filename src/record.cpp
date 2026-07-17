@@ -557,7 +557,6 @@ void Record::viewRecord()
     string pid, pn, pa, rd, rt, did, dn, dd, ill, dia;
 
     system("cls");
-    system("Color F0");
 
     cout << "=====================================================" << endl;
     cout << "     SMARTHEALTH SYSTEM (Doctor View)    " << endl;
@@ -633,7 +632,6 @@ void Record::viewpatientRecord()
     {
 
         system("cls");
-        system("Color F0");
 
         cout << "=====================================================" << endl;
         cout << "    SMARTHEALTH SYSTEM (Patient View)    " << endl;
