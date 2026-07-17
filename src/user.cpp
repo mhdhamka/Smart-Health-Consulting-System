@@ -1,6 +1,6 @@
 /*
  * User Class Implementation
- * Smart Health Consulting System
+ * Smart Health System
  */
 
 #include <iostream>
