@@ -42,11 +42,7 @@ Hospital::Hospital()
 }
 
 
-
-
 // Setter functions
-
-
 void Hospital::sethospitalName(string hn)
 {
     hospitalName = hn;
@@ -122,8 +118,6 @@ void Hospital::setdiagnosis(string di)
 
 
 // Getter functions
-
-
 string Hospital::gethospitalName()
 {
     return hospitalName;
@@ -196,21 +190,14 @@ string Hospital::getdiagnosis()
 }
 
 
-
-
-
 /*
  * Hospital Administrator Login
  */
-
-
 void Hospital::login()
 {
 
     string hosID;
     string hosPassword;
-
-
 
     cout
     << "\n=====================================================\n";
@@ -221,11 +208,8 @@ void Hospital::login()
     cout
     << " Hospital Administrator Login\n";
 
-
     cout
     << "=====================================================\n";
-
-
 
     cout
     << "\nHospital ID : ";
@@ -233,15 +217,11 @@ void Hospital::login()
     cin
     >> hosID;
 
-
-
     cout
     << "Password    : ";
 
     cin
     >> hosPassword;
-
-
 
     if(
         hosID == username &&
@@ -254,65 +234,43 @@ void Hospital::login()
         << hospitalName
         << "! Login successful.\n";
 
-
         system("pause");
-
-
         hospitalMenu();
 
     }
 
     else
     {
-
         cout
         << "\nInvalid hospital ID or password.";
-
     }
 
 }
 
 
-
-
-
-
-
 /*
  * Hospital Admin Menu
  */
-
-
 void Hospital::hospitalMenu()
 {
-
     int option;
-
-
 
     while(true)
     {
 
-
         system("cls");
-
 
         cout
         << "\n=====================================================\n";
 
-
         cout
         << " SMART HEALTH CONSULTING SYSTEM\n";
-
 
         cout
         << " Hospital Administrator Menu\n";
 
-
         cout
         << "=====================================================\n";
-
-
 
         cout
         << "\n1. Generate Receipt";
@@ -323,73 +281,45 @@ void Hospital::hospitalMenu()
         cout
         << "\n3. Logout";
 
-
-
         cout
         << "\n\nSelect option: ";
 
         cin
         >> option;
 
-
-
         switch(option)
         {
-
 
         case 1:
 
             generateReceipt();
-
             break;
-
-
 
         case 2:
 
             viewReceipt();
-
             break;
 
-
-
         case 3:
-
             return;
-
-
 
         default:
 
             cout
             << "\nInvalid option.";
-
             system("pause");
 
         }
-
     }
-
 }
-
-
-
-
-
 
 
 /*
  * Generate Receipt
  */
-
-
 void Hospital::generateReceipt()
 {
-
-
     system("cls");
-
-
 
     cout
     << "\n=====================================================\n";
@@ -400,16 +330,11 @@ void Hospital::generateReceipt()
     cout
     << "=====================================================\n";
 
-
-
-
     cout
     << "\nReceipt ID : ";
 
     cin
     >> receiptID;
-
-
 
     cout
     << "Patient ID : ";
@@ -417,11 +342,7 @@ void Hospital::generateReceipt()
     cin
     >> patientID;
 
-
-
     cin.ignore();
-
-
 
     cout
     << "Patient Name : ";
@@ -431,8 +352,6 @@ void Hospital::generateReceipt()
         patientName
     );
 
-
-
     cout
     << "Patient Age : ";
 
@@ -440,8 +359,6 @@ void Hospital::generateReceipt()
         cin,
         patientAge
     );
-
-
 
     cout
     << "Receipt Date : ";
@@ -451,8 +368,6 @@ void Hospital::generateReceipt()
         receiptdate
     );
 
-
-
     cout
     << "Receipt Time : ";
 
@@ -460,8 +375,6 @@ void Hospital::generateReceipt()
         cin,
         receipttime
     );
-
-
 
     cout
     << "\nDrug ID : ";
@@ -471,8 +384,6 @@ void Hospital::generateReceipt()
         drugID
     );
 
-
-
     cout
     << "Drug Name : ";
 
@@ -480,8 +391,6 @@ void Hospital::generateReceipt()
         cin,
         drugName
     );
-
-
 
     cout
     << "Drug Description : ";
@@ -491,8 +400,6 @@ void Hospital::generateReceipt()
         drugDes
     );
 
-
-
     cout
     << "\nIllness : ";
 
@@ -500,8 +407,6 @@ void Hospital::generateReceipt()
         cin,
         illness
     );
-
-
 
     cout
     << "Diagnosis : ";
@@ -512,15 +417,10 @@ void Hospital::generateReceipt()
     );
 
 
-
-
-
     ofstream receiptFile(
         "data/Receipt.txt",
         ios::app
     );
-
-
 
     if(!receiptFile)
     {
@@ -532,61 +432,36 @@ void Hospital::generateReceipt()
 
     }
 
-
-
     receiptFile
 
     << receiptID << endl
-
     << patientID << endl
-
     << patientName << endl
-
     << patientAge << endl
-
     << receiptdate << endl
-
     << receipttime << endl
-
     << drugID << endl
-
     << drugName << endl
-
     << drugDes << endl
-
     << illness << endl
-
     << diagnosis << endl
 
     << endl;
 
-
-
     receiptFile.close();
-
-
 
     cout
     << "\nReceipt successfully generated.";
 
     system("pause");
-
 }
-
-
-
-
-
 
 
 /*
  * View Receipt
  */
-
-
 void Hospital::viewReceipt()
 {
-
 
     ifstream receiptFile(
         "data/Receipt.txt"
@@ -605,8 +480,6 @@ void Hospital::viewReceipt()
         return;
 
     }
-
-
 
     system("cls");
 
@@ -636,113 +509,79 @@ void Hospital::viewReceipt()
             continue;
         }
 
-
-
         getline(receiptFile, patientID);
-
         getline(receiptFile, patientName);
-
         getline(receiptFile, patientAge);
-
         getline(receiptFile, receiptdate);
-
         getline(receiptFile, receipttime);
-
         getline(receiptFile, drugID);
-
         getline(receiptFile, drugName);
-
         getline(receiptFile, drugDes);
-
         getline(receiptFile, illness);
-
         getline(receiptFile, diagnosis);
-
-
-
-
 
         cout
         << "\nReceipt "
         << count
         << "\n";
 
-
         cout
         << "Receipt ID : "
         << receiptID
         << endl;
-
 
         cout
         << "Patient ID : "
         << patientID
         << endl;
 
-
         cout
         << "Patient Name : "
         << patientName
         << endl;
-
 
         cout
         << "Patient Age : "
         << patientAge
         << endl;
 
-
         cout
         << "Date : "
         << receiptdate
         << endl;
-
 
         cout
         << "Time : "
         << receipttime
         << endl;
 
-
         cout
         << "Drug : "
         << drugName
         << endl;
-
 
         cout
         << "Description : "
         << drugDes
         << endl;
 
-
         cout
         << "Illness : "
         << illness
         << endl;
-
 
         cout
         << "Diagnosis : "
         << diagnosis
         << endl;
 
-
         cout
         << "\n---------------------------------\n";
 
-
-
         count++;
-
     }
 
-
-
     receiptFile.close();
-
-
     system("pause");
-
 }
 
