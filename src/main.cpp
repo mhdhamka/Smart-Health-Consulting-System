@@ -3,7 +3,6 @@
  * Main Application
  */
 
-
 #include <iostream>
 #include <limits>
 #include <windows.h>
@@ -13,7 +12,6 @@
 #include "hospital.h"
 
 using namespace std;
-
 
 void clearScreen()
 {
