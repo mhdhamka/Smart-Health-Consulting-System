@@ -1,7 +1,3 @@
-/*******************************
-Class User
-Implemented by Mohammad Hamka Izzuddin Bin Mohamad Yahya (73571)
-********************************/
 
 /*Class User header file*/
 #ifndef USER_H
