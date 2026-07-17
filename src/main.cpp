@@ -1,7 +1,8 @@
 /*
- * Smart Health Consulting System
+ * SmartHealth System
  * Main Application
  */
+
 
 #include <iostream>
 #include <limits>
@@ -12,6 +13,7 @@
 #include "hospital.h"
 
 using namespace std;
+
 
 void clearScreen()
 {
@@ -38,7 +40,7 @@ void pauseScreen()
 void displayHeader(string title)
 {
     cout << "\n==================================================\n";
-    cout << "        SMART HEALTH CONSULTING SYSTEM\n";
+    cout << "        SMARTHEALTH SYSTEM\n";
     cout << "              " << title << "\n";
     cout << "==================================================\n";
 }
@@ -202,7 +204,7 @@ int main()
 
 
     cout
-    << "\nThank you for using Smart Health Consulting System";
+    << "\nThank you for using SmartHealth System";
 
 
     return 0;
