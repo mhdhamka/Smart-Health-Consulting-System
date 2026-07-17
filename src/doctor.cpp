@@ -3,7 +3,6 @@
  * Smart Health Consulting System
  */
 
-
 #include <iostream>
 #include <string>
 #include <conio.h>
@@ -22,8 +21,6 @@ Record Rec;
 /*
  * Constructor
  */
-
-
 Doctor::Doctor()
 {
 
@@ -38,21 +35,13 @@ Doctor::Doctor()
 }
 
 
-
-
-
-
-
 /*
  * Setter
  */
-
-
 void Doctor::setDoctorName(string dn)
 {
     doctorName = dn;
 }
-
 
 void Doctor::setDoctorSpecialization(string ds)
 {
@@ -60,16 +49,9 @@ void Doctor::setDoctorSpecialization(string ds)
 }
 
 
-
-
-
-
-
 /*
  * Getter
  */
-
-
 string Doctor::getDoctorName()
 {
     return doctorName;
@@ -82,25 +64,14 @@ string Doctor::getDoctorSpecialization()
 }
 
 
-
-
-
-
-
-
 /*
  * Doctor Login
  */
-
-
 void Doctor::login()
 {
 
     string docID;
-
     string docPassword;
-
-
 
     cout
     << "\n=====================================================\n";
@@ -118,15 +89,11 @@ void Doctor::login()
     << "=====================================================\n";
 
 
-
-
     cout
     << "\nDoctor ID : ";
 
     cin
     >> docID;
-
-
 
     cout
     << "Password  : ";
@@ -134,42 +101,30 @@ void Doctor::login()
     cin
     >> docPassword;
 
-
-
-
     if(
         docID == username &&
         docPassword == password
       )
     {
-
-
         cout
         << "\nWelcome Doctor "
         << doctorName
         << "! Login successful.\n";
 
-
         system("pause");
-
-
         doctorMenu();
-
 
     }
 
     else
     {
-
         cout
         << "\nInvalid doctor ID or password.";
-
-
         system("pause");
 
     }
-
 }
+
 
 /*
  * Doctor Menu
@@ -179,91 +134,62 @@ void Doctor::doctorMenu()
 
     int option;
 
-
-
     Appointment appointmentSystem;
-
     Record recordSystem;
-
-
-
 
     while(true)
     {
 
-
         system("cls");
-
-
 
         cout
         << "\n==============================================\n";
 
-
         cout
         << " SMART HEALTH CONSULTING SYSTEM\n";
-
 
         cout
         << " Doctor Menu\n";
 
-
         cout
         << "==============================================\n";
-
-
 
         cout
         << "\n1. View Appointment";
 
-
         cout
         << "\n2. Add Medical Record";
-
 
         cout
         << "\n3. Delete Medical Record";
 
-
         cout
         << "\n4. Edit Medical Record";
-
 
         cout
         << "\n5. View Medical Record";
 
-
         cout
         << "\n6. Logout";
-
-
-
 
         cout
         << "\n\nSelect option: ";
 
-
         cin
         >> option;
 
-
-
-
         switch(option)
         {
-
 
         case 1:
 
             appointmentSystem.viewAppointment();
             break;
 
-
         case 2:
 
             recordSystem.addRecord();
             break;
-
 
         case 3:
 
@@ -281,11 +207,9 @@ void Doctor::doctorMenu()
             recordSystem.viewRecord();
             break;
 
-
         case 6:
 
             return;
-
 
         default:
 
