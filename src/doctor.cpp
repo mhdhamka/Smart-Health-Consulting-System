@@ -1,6 +1,6 @@
 /*
  * Doctor Class Implementation
- * Smart Health Consulting System
+ * SmartHealth System
  */
 
 #include <iostream>
@@ -28,7 +28,7 @@ Doctor::Doctor()
 
     password = "74251";
 
-    doctorName = "Azreen Shafieqah";
+    doctorName = "Lamine Hamka";
 
     doctorSpecialization = "Paediatric";
 
@@ -78,7 +78,7 @@ void Doctor::login()
 
 
     cout
-    << " SMART HEALTH CONSULTING SYSTEM\n";
+    << " SMARTHEALTH SYSTEM\n";
 
 
     cout
@@ -146,7 +146,7 @@ void Doctor::doctorMenu()
         << "\n==============================================\n";
 
         cout
-        << " SMART HEALTH CONSULTING SYSTEM\n";
+        << " SMARTHEALTH SYSTEM\n";
 
         cout
         << " Doctor Menu\n";
