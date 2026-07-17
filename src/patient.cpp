@@ -1,5 +1,3 @@
-
-
 /*
  * Patient Class Implementation
  * Smart Health Consulting System
@@ -46,41 +44,30 @@ Patient::Patient()
 /*
  * Setter Functions
  */
-
-
 void Patient::setpatientID(string pid)
 {
     patientID = pid;
 }
-
-
 
 void Patient::setpatientName(string pn)
 {
     patientName = pn;
 }
 
-
-
 void Patient::setpatientAge(string pa)
 {
     patientAge = pa;
 }
-
-
 
 void Patient::setpatientAddress(string padd)
 {
     patientAddress = padd;
 }
 
-
-
 void Patient::setphone(string ph)
 {
     phone = ph;
 }
-
 
 
 void Patient::setmedicalHistory(string mh)
@@ -89,51 +76,33 @@ void Patient::setmedicalHistory(string mh)
 }
 
 
-
-
-
-
-
-
 /*
  * Getter Functions
  */
-
-
 string Patient::getpatientID()
 {
     return patientID;
 }
-
-
 
 string Patient::getpatientName()
 {
     return patientName;
 }
 
-
-
 string Patient::getpatientAge()
 {
     return patientAge;
 }
-
-
 
 string Patient::getpatientAddress()
 {
     return patientAddress;
 }
 
-
-
 string Patient::getphone()
 {
     return phone;
 }
-
-
 
 string Patient::getmedicalHistory()
 {
@@ -184,7 +153,6 @@ void Patient::registration()
         bool exist = false;
 
         string line;
-
 
 
         while(getline(checkFile,line))
@@ -386,25 +354,17 @@ void Patient::login()
     cout
     << "\n=====================================================\n";
 
-
     cout
     << " SMART HEALTH CONSULTING SYSTEM\n";
 
-
     cout
     << " Patient Login\n";
-
 
     cout
     << "=====================================================\n";
 
 
-
-
-
     cin.ignore();
-
-
 
     cout
     << "\nUsername : ";
@@ -415,8 +375,6 @@ void Patient::login()
         username
     );
 
-
-
     cout
     << "Password : ";
 
@@ -425,9 +383,6 @@ void Patient::login()
         cin,
         password
     );
-
-
-
 
 
     if(
@@ -448,27 +403,17 @@ void Patient::login()
     }
 
 
-
-
-
-
     /*
      * Load patient information
      */
-
-
     ifstream patientFile(
         "data/PatientRegistration.txt"
     );
 
-
-
     string user;
-
 
     while(getline(patientFile,user))
     {
-
 
         string pass;
 
@@ -478,13 +423,11 @@ void Patient::login()
             pass
         );
 
-
         if(
             user == username &&
             pass == password
           )
         {
-
             getline(patientFile,patientID);
             getline(patientFile,patientName);
             getline(patientFile,patientAge);
@@ -496,7 +439,6 @@ void Patient::login()
             break;
 
         }
-
 
         else
         {
@@ -523,7 +465,6 @@ void Patient::login()
     << username
     << "! Login successful.";
 
-
     system("pause");
     patientPlatform();
 
@@ -547,66 +488,46 @@ void Patient::patientPlatform()
 
         system("cls");
 
-
-
         cout
         << "\n=================================================\n";
-
 
         cout
         << " SMART HEALTH CONSULTING SYSTEM\n";
 
-
         cout
         << " Patient Menu\n";
 
-
         cout
         << "=================================================\n";
-
-
 
         cout
         << "\nWelcome "
         << username
         << "!";
 
-
-
         cout
         << "\n\n1. View Profile";
-
 
         cout
         << "\n2. Edit Profile";
 
-
         cout
         << "\n3. Set Appointment";
-
 
         cout
         << "\n4. View Medical Record";
 
-
         cout
         << "\n5. Make Payment";
-
 
         cout
         << "\n6. Logout";
 
-
-
         cout
         << "\n\nSelect option: ";
 
-
         cin
         >> option;
-
-
-
 
         switch(option)
         {
@@ -685,13 +606,9 @@ void Patient::patientPlatform()
 /*
  * View Patient Profile
  */
-
-
 void Patient::viewProfile()
 {
-
     system("cls");
-
 
 
     cout
@@ -998,10 +915,7 @@ void Patient::editProfile()
 
             << endl;
 
-
         }
-
-
 
     }
 
