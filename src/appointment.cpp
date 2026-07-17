@@ -209,25 +209,53 @@ void Appointment::addAppointment()
     << "=================================================\n";
 
     cout
-    << "\nAPP01"
-    << "\nDate : 5/1/2022"
-    << "\nTime : 1400"
-    << "\nDoctor : Azreen Shafieqah"
-    << "\nSpecialization : PDC\n";
+        << "\nAPP01"
+        << "\nDate : 05/01/2026"
+        << "\nTime : 09:00"
+        << "\nDoctor : Jude Bellingham"
+        << "\nSpecialization : ORT\n";
 
     cout
-    << "\nAPP02"
-    << "\nDate : 6/1/2022"
-    << "\nTime : 1500"
-    << "\nDoctor : Mohammad Amir"
-    << "\nSpecialization : CAR\n";
+        << "\nAPP02"
+        << "\nDate : 06/01/2026"
+        << "\nTime : 10:00"
+        << "\nDoctor : Kylian Mbappe"
+        << "\nSpecialization : CAR\n";
 
     cout
-    << "\nAPP03"
-    << "\nDate : 7/1/2022"
-    << "\nTime : 1600"
-    << "\nDoctor : Henry Zaynal"
-    << "\nSpecialization : DRT\n";
+        << "\nAPP03"
+        << "\nDate : 07/01/2026"
+        << "\nTime : 11:00"
+        << "\nDoctor : Erling Haaland"
+        << "\nSpecialization : DER\n";
+
+    cout
+        << "\nAPP04"
+        << "\nDate : 08/01/2026"
+        << "\nTime : 13:00"
+        << "\nDoctor : Vinicius Junior"
+        << "\nSpecialization : PED\n";
+
+    cout
+        << "\nAPP05"
+        << "\nDate : 09/01/2026"
+        << "\nTime : 14:00"
+        << "\nDoctor : Jamal Musiala"
+        << "\nSpecialization : ENT\n";
+
+    cout
+        << "\nAPP06"
+        << "\nDate : 10/01/2026"
+        << "\nTime : 15:00"
+        << "\nDoctor : Lamine Yamal"
+        << "\nSpecialization : NEU\n";
+
+    cout
+        << "\nAPP07"
+        << "\nDate : 11/01/2026"
+        << "\nTime : 16:00"
+        << "\nDoctor : Cole Palmer"
+        << "\nSpecialization : GEN\n";
 
     cin.ignore();
 
