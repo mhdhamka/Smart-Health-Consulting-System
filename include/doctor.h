@@ -18,23 +18,18 @@ private:
     string doctorName;
     string doctorSpecialization;
 
-
 public:
 
     Doctor();
 
-
     void setDoctorName(string);
     void setDoctorSpecialization(string);
-
 
     string getDoctorName();
     string getDoctorSpecialization();
 
-
     void login();
     void doctorMenu();
-
 
 };
 
