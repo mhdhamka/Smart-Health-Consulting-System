@@ -3,7 +3,6 @@
  * Smart Health Consulting System
  */
 
-
 #include <iostream>
 #include <string>
 #include <conio.h>
