@@ -1,6 +1,6 @@
 /*
  * Record Class Implementation
- * Smart Health Consulting System
+ * SmartHealth System
  */
 
 #include <iostream>
@@ -198,7 +198,7 @@ void Record::addRecord()
     << "\n=====================================================\n";
 
     cout
-    << " SMART HEALTH CONSULTING SYSTEM\n";
+    << " SMARTHEALTH SYSTEM\n";
 
     cout
     << " Add Patient Medical Record\n";
@@ -560,7 +560,7 @@ void Record::viewRecord()
     system("Color F0");
 
     cout << "=====================================================" << endl;
-    cout << "     SMART HEALTH CONSULTING SYSTEM (Doctor View)    " << endl;
+    cout << "     SMARTHEALTH SYSTEM (Doctor View)    " << endl;
     cout << "=====================================================" << endl;
     cout << "\n";
     cout << "------------------View Record----------------------" << endl;
@@ -636,7 +636,7 @@ void Record::viewpatientRecord()
         system("Color F0");
 
         cout << "=====================================================" << endl;
-        cout << "    SMART HEALTH CONSULTING SYSTEM (Patient View)    " << endl;
+        cout << "    SMARTHEALTH SYSTEM (Patient View)    " << endl;
         cout << "=====================================================" << endl;
 
         cout << "\n------------------View My Record--------------------\n";
