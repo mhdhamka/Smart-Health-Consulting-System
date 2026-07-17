@@ -1,5 +1,3 @@
-
-/*Class Hospital header file*/
 #ifndef HOSPITAL_H
 #define HOSPITAL_H
 
@@ -11,7 +9,7 @@ using namespace std;
 class Hospital : public User
 {
 	private:
-		/*Private attributes only in class Hospital*/
+		
 		string hospitalName;
 		string receiptID;
 		string patientID;
@@ -26,14 +24,10 @@ class Hospital : public User
 		string diagnosis;
         
         
-        
 	public:
-		//Public methods
 		
-		//Constructor
 		Hospital();
 		
-		/*Setter*/
 		void sethospitalName(string hn);
 		void setreceiptID(string rid);
 		void setpatientID(string pid);
@@ -47,9 +41,6 @@ class Hospital : public User
 		void setillness(string ill);
 		void setdiagnosis(string di);
 
-        
-        
-        /*Getter*/
         string gethospitalName();
 		string getreceiptID() ;
 		string getpatientID() ;
@@ -63,10 +54,6 @@ class Hospital : public User
 		string getillness();
 		string getdiagnosis(); 
 
-      
-        
-        
-        //Public function
         void login();
         void hospitalMenu();
         void generateReceipt();
