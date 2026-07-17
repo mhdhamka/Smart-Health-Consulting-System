@@ -1,6 +1,6 @@
 /*
  * Hospital Class Implementation
- * Smart Health Consulting System
+ * SmartHealth System
  */
 
 #include <iostream>
@@ -18,8 +18,8 @@ using namespace std;
 Hospital::Hospital()
 {
 
-    username = "ain2022";
-    password = "73779";
+    username = "Marc Cucurella";
+    password = "10024";
 
     hospitalName = "Nurulain Basirah";
 
@@ -203,7 +203,7 @@ void Hospital::login()
     << "\n=====================================================\n";
 
     cout
-    << " SMART HEALTH CONSULTING SYSTEM\n";
+    << " SMARTHEALTH SYSTEM\n";
 
     cout
     << " Hospital Administrator Login\n";
@@ -264,7 +264,7 @@ void Hospital::hospitalMenu()
         << "\n=====================================================\n";
 
         cout
-        << " SMART HEALTH CONSULTING SYSTEM\n";
+        << " SMARTHEALTH SYSTEM\n";
 
         cout
         << " Hospital Administrator Menu\n";
