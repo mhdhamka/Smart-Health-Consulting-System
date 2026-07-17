@@ -1,6 +1,6 @@
 /*
  * Appointment Class Implementation
- * Smart Health Consulting System
+ * SmartHealth System
  */
 
 #include <iostream>
@@ -124,7 +124,7 @@ void Appointment::appMenu()
         << "\n=================================================\n";
 
         cout
-        << "      SMART HEALTH CONSULTING SYSTEM\n";
+        << "      SMARTHEALTH SYSTEM\n";
 
         cout
         << "------------- Appointment Menu -----------------\n";
