@@ -1,6 +1,6 @@
 /*
  * Patient Class Implementation
- * Smart Health Consulting System
+ * SmartHealth System
  */
 
 #include <iostream>
@@ -121,7 +121,7 @@ void Patient::registration()
     << "\n=====================================================\n";
 
     cout
-    << " SMART HEALTH CONSULTING SYSTEM\n";
+    << " SMARTHEALTH SYSTEM\n";
 
     cout
     << " Patient Registration\n";
@@ -354,7 +354,7 @@ void Patient::login()
     << "\n=====================================================\n";
 
     cout
-    << " SMART HEALTH CONSULTING SYSTEM\n";
+    << " SMARTHEALTH SYSTEM\n";
 
     cout
     << " Patient Login\n";
@@ -491,7 +491,7 @@ void Patient::patientPlatform()
         << "\n=================================================\n";
 
         cout
-        << " SMART HEALTH CONSULTING SYSTEM\n";
+        << " SMARTHEALTH SYSTEM\n";
 
         cout
         << " Patient Menu\n";
