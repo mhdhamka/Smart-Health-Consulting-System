@@ -35,8 +35,6 @@ public:
     void setPaymentSpecialization(string);
     void setPaymentTotalPrice(double);
 
-
-
     string getPaymentAppointmentID();
     string getPaymentDate();
     string getPaymentTime();
@@ -46,11 +44,8 @@ public:
 
     double getPaymentTotalPrice();
 
-
-
     void makePayment();
     void viewPayment();
-
 
 };
 
