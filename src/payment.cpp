@@ -1,6 +1,6 @@
 /*
  * Payment Class Implementation
- * Smart Health Consulting System
+ * SmartHealth System
  */
 
 #include <iostream>
@@ -148,7 +148,7 @@ void Payment::makePayment()
     }
 
     cout << "\n=====================================================\n";
-    cout << "          SMART HEALTH CONSULTING SYSTEM\n";
+    cout << "          SMARTHEALTH SYSTEM\n";
     cout << "----------------------Payment------------------------\n";
 
 
@@ -264,7 +264,7 @@ void Payment::viewPayment()
     string line;
 
     cout << "\n=====================================================\n";
-    cout << "          SMART HEALTH CONSULTING SYSTEM\n";
+    cout << "          SMARTHEALTH SYSTEM\n";
     cout << "--------------------Payment List---------------------\n";
 
     int count = 1;
