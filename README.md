@@ -1,3 +1,10 @@
+![Language](https://img.shields.io/badge/Language-C%2B%2B-blue)
+![Compiler](https://img.shields.io/badge/Compiler-GCC-orange)
+![Environment](https://img.shields.io/badge/Environment-MSYS2%20UCRT64-purple)
+![Platform](https://img.shields.io/badge/Platform-Console-success)
+![Programming](https://img.shields.io/badge/Programming-OOP-green)
+![Status](https://img.shields.io/badge/Status-Completed-brightgreen)
+
 # SmartHealth System
 
 A console-based healthcare management system developed in **C++** as part of an **Object-Oriented Software Development course**.
@@ -254,10 +261,3 @@ The original version was created as part of an academic project, while this enha
 - C++ Application Development
 
 ---
-
-![Language](https://img.shields.io/badge/Language-C%2B%2B-blue)
-![Compiler](https://img.shields.io/badge/Compiler-GCC-orange)
-![Environment](https://img.shields.io/badge/Environment-MSYS2%20UCRT64-purple)
-![Platform](https://img.shields.io/badge/Platform-Console-success)
-![Programming](https://img.shields.io/badge/Programming-OOP-green)
-![Status](https://img.shields.io/badge/Status-Completed-brightgreen)
