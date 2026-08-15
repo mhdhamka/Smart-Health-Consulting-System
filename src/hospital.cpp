@@ -1,11 +1,13 @@
 /*
  * Hospital Class Implementation
- * SmartHealth System
+ * SmartHealth System 
  */
 
 #include <iostream>
 #include <string>
 #include <fstream>
+#include <iomanip>
+#include <limits>
 #include <conio.h>
 
 #include "hospital.h"
@@ -13,16 +15,61 @@
 
 using namespace std;
 
-// Constructor
+// ANSI Color Palette (Modern Dark Theme Styling)
+const string RESET = "\033[0m";
+const string BOLD = "\033[1m";
+const string DIM = "\033[2m";
+const string CYAN = "\033[36m";
+const string BLUE = "\033[34m";
+const string GREEN = "\033[32m";
+const string YELLOW = "\033[33m";
+const string RED = "\033[31m";
+const string MAGENTA = "\033[35m";
 
+void clearScreen()
+{
+#ifdef _WIN32
+    system("cls");
+#else
+    system("clear");
+#endif
+}
+
+void pauseScreen()
+{
+    cout << "\n  " << DIM << "Press [ENTER] to continue..." << RESET;
+    cin.ignore(numeric_limits<streamsize>::max(), '\n');
+    cin.get();
+}
+
+// Modern Dashboard Header Card
+void displayHeader(string subtitle)
+{
+    cout << CYAN << BOLD << "\n  ======================================================\n";
+    cout << "   SMARTHEALTH CLINICAL MANAGEMENT SYSTEM v2.6          \n";
+    cout << "   " << BLUE << left << setw(50) << subtitle << CYAN << " |\n";
+    cout << "  ======================================================\n" << RESET;
+}
+
+int getChoice()
+{
+    int choice;
+    cout << "\n  " << YELLOW << "-> Enter selection: " << RESET;
+    if (!(cin >> choice)) {
+        cin.clear();
+        cin.ignore(numeric_limits<streamsize>::max(), '\n');
+        return -1;
+    }
+    return choice;
+}
+
+// Constructor
 Hospital::Hospital()
 {
-
     username = "Marc Cucurella";
     password = "10024";
 
     hospitalName = "Green Valley Medical Centre";
-
 
     receiptID = "";
     patientID = "";
@@ -38,9 +85,7 @@ Hospital::Hospital()
 
     illness = "";
     diagnosis = "";
-
 }
-
 
 // Setter functions
 void Hospital::sethospitalName(string hn)
@@ -48,74 +93,60 @@ void Hospital::sethospitalName(string hn)
     hospitalName = hn;
 }
 
-
 void Hospital::setreceiptID(string rid)
 {
     receiptID = rid;
 }
-
 
 void Hospital::setpatientID(string pid)
 {
     patientID = pid;
 }
 
-
 void Hospital::setpatientName(string pn)
 {
     patientName = pn;
 }
-
 
 void Hospital::setpatientAge(string pa)
 {
     patientAge = pa;
 }
 
-
 void Hospital::setreceiptdate(string rd)
 {
     receiptdate = rd;
 }
-
 
 void Hospital::setreceipttime(string rt)
 {
     receipttime = rt;
 }
 
-
 void Hospital::setdrugID(string did)
 {
     drugID = did;
 }
-
 
 void Hospital::setdrugName(string dn)
 {
     drugName = dn;
 }
 
-
 void Hospital::setdrugDes(string dd)
 {
     drugDes = dd;
 }
-
 
 void Hospital::setillness(string ill)
 {
     illness = ill;
 }
 
-
 void Hospital::setdiagnosis(string di)
 {
     diagnosis = di;
 }
-
-
-
 
 // Getter functions
 string Hospital::gethospitalName()
@@ -123,130 +154,91 @@ string Hospital::gethospitalName()
     return hospitalName;
 }
 
-
 string Hospital::getreceiptID()
 {
     return receiptID;
 }
-
 
 string Hospital::getpatientID()
 {
     return patientID;
 }
 
-
 string Hospital::getpatientName()
 {
     return patientName;
 }
-
 
 string Hospital::getpatientAge()
 {
     return patientAge;
 }
 
-
 string Hospital::getreceiptdate()
 {
     return receiptdate;
 }
-
 
 string Hospital::getreceipttime()
 {
     return receipttime;
 }
 
-
 string Hospital::getdrugID()
 {
     return drugID;
 }
-
 
 string Hospital::getdrugName()
 {
     return drugName;
 }
 
-
 string Hospital::getdrugDes()
 {
     return drugDes;
 }
-
 
 string Hospital::getillness()
 {
     return illness;
 }
 
-
 string Hospital::getdiagnosis()
 {
     return diagnosis;
 }
-
 
 /*
  * Hospital Administrator Login
  */
 void Hospital::login()
 {
-
     string hosID;
     string hosPassword;
 
-    cout
-    << "\n=====================================================\n";
+    clearScreen();
+    displayHeader("HOSPITAL ADMINISTRATOR AUTHENTICATION");
 
-    cout
-    << " SMARTHEALTH SYSTEM\n";
+    cout << "\n  " << BOLD << "Please enter your administrative credentials:" << RESET << "\n";
+    cout << "  " << CYAN << "> Hospital ID : " << RESET;
+    cin >> hosID;
 
-    cout
-    << " Hospital Administrator Login\n";
+    cout << "  " << CYAN << "> Password    : " << RESET;
+    cin >> hosPassword;
 
-    cout
-    << "=====================================================\n";
-
-    cout
-    << "\nHospital ID : ";
-
-    cin
-    >> hosID;
-
-    cout
-    << "Password    : ";
-
-    cin
-    >> hosPassword;
-
-    if(
-        hosID == username &&
-        hosPassword == password
-      )
+    if (hosID == username && hosPassword == password)
     {
-
-        cout
-        << "\nWelcome "
-        << hospitalName
-        << "! Login successful.\n";
-
-        system("pause");
+        cout << "\n  " << GREEN << "[SUCCESS]" << RESET << " Welcome " << BOLD << hospitalName << RESET << "! Login successful.\n";
+        pauseScreen();
         hospitalMenu();
-
     }
-
     else
     {
-        cout
-        << "\nInvalid hospital ID or password.";
+        cout << "\n  " << RED << "[ERROR]" << RESET << " Invalid hospital ID or password.\n";
+        pauseScreen();
     }
-
 }
-
 
 /*
  * Hospital Admin Menu
@@ -255,48 +247,25 @@ void Hospital::hospitalMenu()
 {
     int option;
 
-    while(true)
+    while (true)
     {
+        clearScreen();
+        displayHeader("PORTAL / HOSPITAL ADMINISTRATOR");
 
-        system("cls");
+        cout << "\n  " << BOLD << "ADMIN OPTIONS:" << RESET << "\n";
+        cout << "  " << MAGENTA << "[1]" << RESET << " Generate Medical Receipt\n";
+        cout << "  " << MAGENTA << "[2]" << RESET << " View Stored Receipts\n";
+        cout << "\n  " << DIM << "[3] Logout / Return" << RESET << "\n";
 
-        cout
-        << "\n=====================================================\n";
+        option = getChoice();
 
-        cout
-        << " SMARTHEALTH SYSTEM\n";
-
-        cout
-        << " Hospital Administrator Menu\n";
-
-        cout
-        << "=====================================================\n";
-
-        cout
-        << "\n1. Generate Receipt";
-
-        cout
-        << "\n2. View Receipt";
-
-        cout
-        << "\n3. Logout";
-
-        cout
-        << "\n\nSelect option: ";
-
-        cin
-        >> option;
-
-        switch(option)
+        switch (option)
         {
-
         case 1:
-
             generateReceipt();
             break;
 
         case 2:
-
             viewReceipt();
             break;
 
@@ -304,207 +273,110 @@ void Hospital::hospitalMenu()
             return;
 
         default:
-
-            cout
-            << "\nInvalid option.";
-            system("pause");
-
+            cout << "\n  " << RED << "[ERROR]" << RESET << " Invalid option. Please choose [1-3].\n";
+            pauseScreen();
         }
     }
 }
-
 
 /*
  * Generate Receipt
  */
 void Hospital::generateReceipt()
 {
-    system("cls");
+    clearScreen();
+    displayHeader("GENERATE NEW RECEIPT");
 
-    cout
-    << "\n=====================================================\n";
+    cout << "  " << BOLD << "Enter receipt & patient details:" << RESET << "\n";
+    cout << "  " << CYAN << "> Receipt ID   : " << RESET;
+    cin >> receiptID;
 
-    cout
-    << " Generate Receipt\n";
+    cout << "  " << CYAN << "> Patient ID   : " << RESET;
+    cin >> patientID;
 
-    cout
-    << "=====================================================\n";
+    cin.ignore(numeric_limits<streamsize>::max(), '\n');
 
-    cout
-    << "\nReceipt ID : ";
+    cout << "  " << CYAN << "> Patient Name : " << RESET;
+    getline(cin, patientName);
 
-    cin
-    >> receiptID;
+    cout << "  " << CYAN << "> Patient Age  : " << RESET;
+    getline(cin, patientAge);
 
-    cout
-    << "Patient ID : ";
+    cout << "  " << CYAN << "> Receipt Date : " << RESET;
+    getline(cin, receiptdate);
 
-    cin
-    >> patientID;
+    cout << "  " << CYAN << "> Receipt Time : " << RESET;
+    getline(cin, receipttime);
 
-    cin.ignore();
+    cout << "\n  " << BOLD << "Enter prescription details:" << RESET << "\n";
+    cout << "  " << CYAN << "> Drug ID      : " << RESET;
+    getline(cin, drugID);
 
-    cout
-    << "Patient Name : ";
+    cout << "  " << CYAN << "> Drug Name    : " << RESET;
+    getline(cin, drugName);
 
-    getline(
-        cin,
-        patientName
-    );
+    cout << "  " << CYAN << "> Drug Desc    : " << RESET;
+    getline(cin, drugDes);
 
-    cout
-    << "Patient Age : ";
+    cout << "\n  " << BOLD << "Enter clinical notes:" << RESET << "\n";
+    cout << "  " << CYAN << "> Illness      : " << RESET;
+    getline(cin, illness);
 
-    getline(
-        cin,
-        patientAge
-    );
+    cout << "  " << CYAN << "> Diagnosis    : " << RESET;
+    getline(cin, diagnosis);
 
-    cout
-    << "Receipt Date : ";
+    ofstream receiptFile("data/Receipt.txt", ios::app);
 
-    getline(
-        cin,
-        receiptdate
-    );
-
-    cout
-    << "Receipt Time : ";
-
-    getline(
-        cin,
-        receipttime
-    );
-
-    cout
-    << "\nDrug ID : ";
-
-    getline(
-        cin,
-        drugID
-    );
-
-    cout
-    << "Drug Name : ";
-
-    getline(
-        cin,
-        drugName
-    );
-
-    cout
-    << "Drug Description : ";
-
-    getline(
-        cin,
-        drugDes
-    );
-
-    cout
-    << "\nIllness : ";
-
-    getline(
-        cin,
-        illness
-    );
-
-    cout
-    << "Diagnosis : ";
-
-    getline(
-        cin,
-        diagnosis
-    );
-
-
-    ofstream receiptFile(
-        "data/Receipt.txt",
-        ios::app
-    );
-
-    if(!receiptFile)
+    if (!receiptFile)
     {
-
-        cout
-        << "\nUnable to save receipt.";
-
+        cout << "\n  " << RED << "[ERROR]" << RESET << " Unable to save receipt file.\n";
+        pauseScreen();
         return;
-
     }
 
-    receiptFile
-
-    << receiptID << endl
-    << patientID << endl
-    << patientName << endl
-    << patientAge << endl
-    << receiptdate << endl
-    << receipttime << endl
-    << drugID << endl
-    << drugName << endl
-    << drugDes << endl
-    << illness << endl
-    << diagnosis << endl
-
-    << endl;
+    receiptFile << receiptID << endl
+                << patientID << endl
+                << patientName << endl
+                << patientAge << endl
+                << receiptdate << endl
+                << receipttime << endl
+                << drugID << endl
+                << drugName << endl
+                << drugDes << endl
+                << illness << endl
+                << diagnosis << endl
+                << endl;
 
     receiptFile.close();
 
-    cout
-    << "\nReceipt successfully generated.";
-
-    system("pause");
+    cout << "\n  " << GREEN << "[SUCCESS]" << RESET << " Receipt successfully generated and saved.\n";
+    pauseScreen();
 }
-
 
 /*
  * View Receipt
  */
 void Hospital::viewReceipt()
 {
+    ifstream receiptFile("data/Receipt.txt");
 
-    ifstream receiptFile(
-        "data/Receipt.txt"
-    );
-
-
-
-    if(!receiptFile)
+    if (!receiptFile)
     {
-
-        cout
-        << "\nNo receipt found.";
-
-        system("pause");
-
+        clearScreen();
+        displayHeader("RECEIPT ARCHIVE");
+        cout << "\n  " << RED << "[INFO]" << RESET << " No receipt archives found.\n";
+        pauseScreen();
         return;
-
     }
 
-    system("cls");
-
-
-
-    cout
-    << "\n=====================================================\n";
-
-    cout
-    << " Receipt List\n";
-
-    cout
-    << "=====================================================\n";
-
-
+    clearScreen();
+    displayHeader("RECEIPT RECORDS ARCHIVE");
 
     int count = 1;
 
-
-
-    while(getline(receiptFile, receiptID))
+    while (getline(receiptFile, receiptID))
     {
-
-
-        if(receiptID.empty())
+        if (receiptID.empty())
         {
             continue;
         }
@@ -520,68 +392,19 @@ void Hospital::viewReceipt()
         getline(receiptFile, illness);
         getline(receiptFile, diagnosis);
 
-        cout
-        << "\nReceipt "
-        << count
-        << "\n";
-
-        cout
-        << "Receipt ID : "
-        << receiptID
-        << endl;
-
-        cout
-        << "Patient ID : "
-        << patientID
-        << endl;
-
-        cout
-        << "Patient Name : "
-        << patientName
-        << endl;
-
-        cout
-        << "Patient Age : "
-        << patientAge
-        << endl;
-
-        cout
-        << "Date : "
-        << receiptdate
-        << endl;
-
-        cout
-        << "Time : "
-        << receipttime
-        << endl;
-
-        cout
-        << "Drug : "
-        << drugName
-        << endl;
-
-        cout
-        << "Description : "
-        << drugDes
-        << endl;
-
-        cout
-        << "Illness : "
-        << illness
-        << endl;
-
-        cout
-        << "Diagnosis : "
-        << diagnosis
-        << endl;
-
-        cout
-        << "\n---------------------------------\n";
+        cout << "\n  " << BOLD << "--- RECEIPT RECORD #" << count << " ---" << RESET << "\n";
+        cout << "  " << CYAN << "Receipt ID   : " << RESET << receiptID << "\n";
+        cout << "  " << CYAN << "Patient ID   : " << RESET << patientID << "\n";
+        cout << "  " << CYAN << "Patient Name : " << RESET << patientName << "\n";
+        cout << "  " << CYAN << "Patient Age  : " << RESET << patientAge << "\n";
+        cout << "  " << CYAN << "Date / Time  : " << RESET << receiptdate << " at " << receipttime << "\n";
+        cout << "  " << CYAN << "Medication   : " << RESET << drugName << " (" << drugID << ") - " << drugDes << "\n";
+        cout << "  " << CYAN << "Illness      : " << RESET << illness << "\n";
+        cout << "  " << CYAN << "Diagnosis    : " << RESET << diagnosis << "\n";
 
         count++;
     }
 
     receiptFile.close();
-    system("pause");
+    pauseScreen();
 }
-
