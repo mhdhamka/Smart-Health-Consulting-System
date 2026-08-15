@@ -1,6 +1,6 @@
 /*
  * SmartHealth System
- * Main Application - Ultra-Modern CLI Edition
+ * Main Application 
  */
 
 #include <iostream>
