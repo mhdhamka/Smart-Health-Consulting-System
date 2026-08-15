@@ -1,22 +1,60 @@
 /*
  * Record Class Implementation
- * SmartHealth System
+ * SmartHealth System 
  */
 
 #include <iostream>
 #include <fstream>
 #include <string>
+#include <iomanip>
+#include <limits>
+#include <vector>
 
 #include "record.h"
 
 using namespace std;
+
+// ANSI Color Palette (Modern Dark Theme Styling)
+const string RESET = "\033[0m";
+const string BOLD = "\033[1m";
+const string DIM = "\033[2m";
+const string CYAN = "\033[36m";
+const string BLUE = "\033[34m";
+const string GREEN = "\033[32m";
+const string YELLOW = "\033[33m";
+const string RED = "\033[31m";
+const string MAGENTA = "\033[35m";
+
+static void clearScreen()
+{
+#ifdef _WIN32
+    system("cls");
+#else
+    system("clear");
+#endif
+}
+
+static void pauseScreen()
+{
+    cout << "\n  " << DIM << "Press [ENTER] to continue..." << RESET;
+    cin.ignore(numeric_limits<streamsize>::max(), '\n');
+    cin.get();
+}
+
+// Modern Dashboard Header Card
+static void displayHeader(string subtitle)
+{
+    cout << CYAN << BOLD << "\n  ======================================================\n";
+    cout << "   SMARTHEALTH CLINICAL MANAGEMENT SYSTEM v2.6          \n";
+    cout << "   " << BLUE << left << setw(50) << subtitle << CYAN << " |\n";
+    cout << "  ======================================================\n" << RESET;
+}
 
 /*
  * Constructor
  */
 Record::Record()
 {
-
     patientID = "";
     patientName = "";
     patientAge = "";
@@ -27,9 +65,7 @@ Record::Record()
     drugDes = "";
     illness = "";
     diagnosis = "";
-
 }
-
 
 /*
  * Setter Functions
@@ -84,7 +120,6 @@ void Record::setdiagnosis(string dia)
     diagnosis = dia;
 }
 
-
 /*
  * Getter Functions
  */
@@ -92,6 +127,7 @@ string Record::getpatientID()
 {
     return patientID;
 }
+
 string Record::getpatientName()
 {
     return patientName;
@@ -137,450 +173,321 @@ string Record::getdiagnosis()
     return diagnosis;
 }
 
-
 /*
  * Check Patient ID Exists
  */
 bool checkExistPatientID(string patientID)
 {
-
-    ifstream file(
-        "data/Record.txt"
-    );
+    ifstream file("data/Record.txt");
 
     if(!file)
     {
-
         return false;
-
     }
 
     string id;
 
-    while(getline(file,id))
+    while(getline(file, id))
     {
-        /*
-         * Skip remaining 9 fields
-         */
-
         if(id == patientID)
         {
-
             file.close();
-
             return true;
-
         }
 
-        for(int i=0;i<9;i++)
+        for(int i = 0; i < 9; i++)
         {
-
-            getline(file,id);
-
+            getline(file, id);
         }
-
     }
 
     file.close();
     return false;
-
 }
-
 
 /*
  * Add Medical Record
  */
 void Record::addRecord()
 {
-    system("cls");
+    clearScreen();
+    displayHeader("ADD PATIENT MEDICAL RECORD");
 
-    cout
-    << "\n=====================================================\n";
+    cin.ignore(numeric_limits<streamsize>::max(), '\n');
 
-    cout
-    << " SMARTHEALTH SYSTEM\n";
+    cout << "\n  " << BOLD << "Enter Patient & Medical Details:" << RESET << "\n";
+    cout << "  " << CYAN << "> Patient ID       : " << RESET;
+    getline(cin, patientID);
 
-    cout
-    << " Add Patient Medical Record\n";
+    cout << "  " << CYAN << "> Patient Name     : " << RESET;
+    getline(cin, patientName);
 
-    cout
-    << "=====================================================\n";
+    cout << "  " << CYAN << "> Patient Age      : " << RESET;
+    getline(cin, patientAge);
 
-    cout
-    << "\nPatient ID : ";
+    cout << "  " << CYAN << "> Record Date      : " << RESET;
+    getline(cin, Date);
 
-    cin
-    >> patientID;
+    cout << "  " << CYAN << "> Record Time      : " << RESET;
+    getline(cin, Time);
 
-    cin.ignore();
+    cout << "\n  " << BOLD << "Enter Prescription Details:" << RESET << "\n";
+    cout << "  " << CYAN << "> Drug ID          : " << RESET;
+    getline(cin, drugID);
 
-    cout
-    << "Patient Name : ";
+    cout << "  " << CYAN << "> Drug Name        : " << RESET;
+    getline(cin, drugName);
 
-    getline(
-        cin,
-        patientName
-    );
+    cout << "  " << CYAN << "> Drug Description : " << RESET;
+    getline(cin, drugDes);
 
-    cout
-    << "Patient Age : ";
+    cout << "\n  " << BOLD << "Enter Clinical Details:" << RESET << "\n";
+    cout << "  " << CYAN << "> Patient Illness  : " << RESET;
+    getline(cin, illness);
 
-    getline(
-        cin,
-        patientAge
-    );
+    cout << "  " << CYAN << "> Patient Diagnosis: " << RESET;
+    getline(cin, diagnosis);
 
-    cout
-    << "Record Date : ";
-
-    getline(
-        cin,
-        Date
-    );
-
-    cout
-    << "Record Time : ";
-
-    getline(
-        cin,
-        Time
-    );
-
-
-    /*
-     * Prescription
-     */
-    cout
-    << "\nDrug ID : ";
-
-    getline(
-        cin,
-        drugID
-    );
-
-    cout
-    << "Drug Name : ";
-
-    getline(
-        cin,
-        drugName
-    );
-
-    cout
-    << "Drug Description : ";
-
-    getline(
-        cin,
-        drugDes
-    );
-
-    /*
-     * Medical information
-     */
-    cout
-    << "\nPatient Illness : ";
-
-    getline(
-        cin,
-        illness
-    );
-
-    cout
-    << "Patient Diagnosis : ";
-
-    getline(
-        cin,
-        diagnosis
-    );
-
-    ofstream recordFile(
-        "data/Record.txt",
-        ios::app
-    );
+    ofstream recordFile("data/Record.txt", ios::app);
 
     if(!recordFile)
     {
-
-        cout
-        << "\nUnable to save record.";
-
+        cout << "\n  " << RED << "[ERROR]" << RESET << " Unable to save record file.\n";
+        pauseScreen();
         return;
-
     }
 
-    recordFile
-
-    << patientID << endl
-    << patientName << endl
-    << patientAge << endl
-    << Date << endl
-    << Time << endl
-    << drugID << endl
-    << drugName << endl
-    << drugDes << endl
-    << illness << endl
-    << diagnosis << endl
-
-    << endl;
+    recordFile << patientID << endl
+               << patientName << endl
+               << patientAge << endl
+               << Date << endl
+               << Time << endl
+               << drugID << endl
+               << drugName << endl
+               << drugDes << endl
+               << illness << endl
+               << diagnosis << endl
+               << endl;
 
     recordFile.close();
 
-    cout
-    << "\nPatient record saved successfully.";
-
-
-    system("pause");
-
+    cout << "\n  " << GREEN << "[SUCCESS]" << RESET << " Patient record saved successfully.\n";
+    pauseScreen();
 }
 
-
+/*
+ * Remove Medical Record
+ */
 void Record::removeRecord()
 {
-
-    system("cls");
-
-    string searchID;
-
-    cout<<"\n=====================================================";
-    cout<<"\n          Remove Patient Record";
-    cout<<"\n=====================================================";
-
-    cout<<"\nEnter Patient ID to remove: ";
-    cin>>searchID;
-
-    ifstream file("data/Record.txt");
-    ofstream temp("data/tempRecord.txt");
-
-    if(!file)
-    {
-        cout<<"\nNo record available.";
-        system("pause");
-        return;
-    }
-
-    string pid,pn,pa,rd,rt,did,dn,dd,ill,dia;
-
-    bool found=false;
-
-    while(getline(file,pid))
-    {
-
-        getline(file,pn);
-        getline(file,pa);
-        getline(file,rd);
-        getline(file,rt);
-        getline(file,did);
-        getline(file,dn);
-        getline(file,dd);
-        getline(file,ill);
-        getline(file,dia);
-
-
-        if(pid == searchID)
-        {
-
-            found=true;
-            continue;
-
-        }
-
-        temp
-        << pid << endl
-        << pn << endl
-        << pa << endl
-        << rd << endl
-        << rt << endl
-        << did << endl
-        << dn << endl
-        << dd << endl
-        << ill << endl
-        << dia << endl
-
-        << endl;
-
-    }
-
-
-    file.close();
-    temp.close();
-
-    remove("data/Record.txt");
-
-
-    rename(
-        "data/tempRecord.txt",
-        "data/Record.txt"
-    );
-
-    if(found)
-    {
-        cout<<"\nRecord deleted successfully.";
-    }
-    else
-    {
-        cout<<"\nPatient ID not found.";
-    }
-
-    system("pause");
-
-}
-
-
-void Record::editRecord()
-{
-
-    system("cls");
-
+    clearScreen();
+    displayHeader("REMOVE PATIENT RECORD");
 
     string searchID;
-
-
-    cout << "\n=====================================================";
-    cout << "\n          Edit Patient Record";
-    cout << "\n=====================================================";
-
-
-    cout << "\nEnter Patient ID to edit: ";
+    cout << "\n  " << CYAN << "> Enter Patient ID to remove: " << RESET;
     cin >> searchID;
 
     ifstream file("data/Record.txt");
-
     ofstream temp("data/tempRecord.txt");
-
 
     if(!file)
     {
-        cout << "\nNo record found.";
-        system("pause");
+        cout << "\n  " << RED << "[INFO]" << RESET << " No record available.\n";
+        pauseScreen();
         return;
     }
 
-    string pid,pn,pa,rd,rt,did,dn,dd,ill,dia;
+    string pid, pn, pa, rd, rt, did, dn, dd, ill, dia;
+    bool found = false;
 
-    bool found=false;
-
-    while(getline(file,pid))
+    while(getline(file, pid))
     {
+        getline(file, pn);
+        getline(file, pa);
+        getline(file, rd);
+        getline(file, rt);
+        getline(file, did);
+        getline(file, dn);
+        getline(file, dd);
+        getline(file, ill);
+        getline(file, dia);
 
-        getline(file,pn);
-        getline(file,pa);
-        getline(file,rd);
-        getline(file,rt);
-        getline(file,did);
-        getline(file,dn);
-        getline(file,dd);
-        getline(file,ill);
-        getline(file,dia);
-
+        string emptyLine;
+        getline(file, emptyLine);
 
         if(pid == searchID)
         {
-
-            found=true;
-
-            cout<<"\nNew Patient Name : ";
-            cin.ignore();
-            getline(cin,pn);
-
-            cout<<"New Patient Age : ";
-            getline(cin,pa);
-
-            cout<<"New Date : ";
-            getline(cin,rd);
-
-            cout<<"New Time : ";
-            getline(cin,rt);
-
-            cout<<"New Drug ID : ";
-            getline(cin,did);
-
-            cout<<"New Drug Name : ";
-            getline(cin,dn);
-
-            cout<<"New Drug Description : ";
-            getline(cin,dd);
-
-            cout<<"New Illness : ";
-            getline(cin,ill);
-
-            cout<<"New Diagnosis : ";
-            getline(cin,dia);
-
-
+            found = true;
+            continue;
         }
 
-        temp
-        << pid << endl
-        << pn << endl
-        << pa << endl
-        << rd << endl
-        << rt << endl
-        << did << endl
-        << dn << endl
-        << dd << endl
-        << ill << endl
-        << dia << endl
-
-        << endl;
-
-
+        temp << pid << endl
+             << pn << endl
+             << pa << endl
+             << rd << endl
+             << rt << endl
+             << did << endl
+             << dn << endl
+             << dd << endl
+             << ill << endl
+             << dia << endl
+             << endl;
     }
 
     file.close();
     temp.close();
 
     remove("data/Record.txt");
-
-    rename(
-        "data/tempRecord.txt",
-        "data/Record.txt"
-    );
+    rename("data/tempRecord.txt", "data/Record.txt");
 
     if(found)
     {
-        cout<<"\nRecord updated successfully.";
+        cout << "\n  " << GREEN << "[SUCCESS]" << RESET << " Record deleted successfully.\n";
     }
     else
     {
-        cout<<"\nPatient ID not found.";
+        cout << "\n  " << RED << "[ERROR]" << RESET << " Patient ID not found.\n";
     }
 
-
-    system("pause");
-
+    pauseScreen();
 }
 
-
-//function for doctor to view record
-void Record::viewRecord()
+/*
+ * Edit Medical Record
+ */
+void Record::editRecord()
 {
-    string pid, pn, pa, rd, rt, did, dn, dd, ill, dia;
+    clearScreen();
+    displayHeader("EDIT PATIENT RECORD");
 
-    system("cls");
+    string searchID;
+    cout << "\n  " << CYAN << "> Enter Patient ID to edit: " << RESET;
+    cin >> searchID;
 
-    cout << "=====================================================" << endl;
-    cout << "     SMARTHEALTH SYSTEM (Doctor View)    " << endl;
-    cout << "=====================================================" << endl;
-    cout << "\n";
-    cout << "------------------View Record----------------------" << endl;
-    cout << "\n";
+    ifstream file("data/Record.txt");
+    ofstream temp("data/tempRecord.txt");
 
-
-    ifstream patrecord("Record.txt");
-
-    if(!patrecord)
+    if(!file)
     {
-        cout << "\n Sorry but there is no record in the system.\n";
-        system("pause");
+        cout << "\n  " << RED << "[ERROR]" << RESET << " No record found.\n";
+        pauseScreen();
         return;
     }
 
+    string pid, pn, pa, rd, rt, did, dn, dd, ill, dia;
+    bool found = false;
 
+    while(getline(file, pid))
+    {
+        getline(file, pn);
+        getline(file, pa);
+        getline(file, rd);
+        getline(file, rt);
+        getline(file, did);
+        getline(file, dn);
+        getline(file, dd);
+        getline(file, ill);
+        getline(file, dia);
+
+        string emptyLine;
+        getline(file, emptyLine);
+
+        if(pid == searchID)
+        {
+            found = true;
+
+            cin.ignore(numeric_limits<streamsize>::max(), '\n');
+
+            cout << "\n  " << BOLD << "Enter New Details for Patient " << CYAN << searchID << RESET << ":\n";
+            cout << "  " << CYAN << "> New Patient Name   : " << RESET;
+            getline(cin, pn);
+
+            cout << "  " << CYAN << "> New Patient Age    : " << RESET;
+            getline(cin, pa);
+
+            cout << "  " << CYAN << "> New Date           : " << RESET;
+            getline(cin, rd);
+
+            cout << "  " << CYAN << "> New Time           : " << RESET;
+            getline(cin, rt);
+
+            cout << "  " << CYAN << "> New Drug ID        : " << RESET;
+            getline(cin, did);
+
+            cout << "  " << CYAN << "> New Drug Name      : " << RESET;
+            getline(cin, dn);
+
+            cout << "  " << CYAN << "> New Drug Des       : " << RESET;
+            getline(cin, dd);
+
+            cout << "  " << CYAN << "> New Illness        : " << RESET;
+            getline(cin, ill);
+
+            cout << "  " << CYAN << "> New Diagnosis      : " << RESET;
+            getline(cin, dia);
+        }
+
+        temp << pid << endl
+             << pn << endl
+             << pa << endl
+             << rd << endl
+             << rt << endl
+             << did << endl
+             << dn << endl
+             << dd << endl
+             << ill << endl
+             << dia << endl
+             << endl;
+    }
+
+    file.close();
+    temp.close();
+
+    remove("data/Record.txt");
+    rename("data/tempRecord.txt", "data/Record.txt");
+
+    if(found)
+    {
+        cout << "\n  " << GREEN << "[SUCCESS]" << RESET << " Record updated successfully.\n";
+    }
+    else
+    {
+        cout << "\n  " << RED << "[ERROR]" << RESET << " Patient ID not found.\n";
+    }
+
+    pauseScreen();
+}
+
+/*
+ * Doctor View Record
+ */
+void Record::viewRecord()
+{
+    clearScreen();
+    displayHeader("DOCTOR VIEW - ALL MEDICAL RECORDS");
+
+    ifstream patrecord("data/Record.txt");
+
+    if(!patrecord)
+    {
+        cout << "\n  " << RED << "[INFO]" << RESET << " Sorry, but there is no record in the system.\n";
+        pauseScreen();
+        return;
+    }
+
+    string pid, pn, pa, rd, rt, did, dn, dd, ill, dia;
     int count = 1;
-
+    bool hasRecords = false;
 
     while(getline(patrecord, pid))
     {
+        if(pid.empty())
+        {
+            continue;
+        }
+
+        hasRecords = true;
+
         getline(patrecord, pn);
         getline(patrecord, pa);
         getline(patrecord, rd);
@@ -591,75 +498,64 @@ void Record::viewRecord()
         getline(patrecord, ill);
         getline(patrecord, dia);
 
+        string emptyLine;
+        getline(patrecord, emptyLine);
 
-        cout << "\n-----------------------------------------------\n";
-        cout << "       Record " << count << endl;
-        cout << "-----------------------------------------------\n";
-
-        cout << "Patient ID          : " << pid << endl;
-        cout << "Patient Name        : " << pn << endl;
-        cout << "Patient Age         : " << pa << endl;
-        cout << "Record Date         : " << rd << endl;
-        cout << "Record Time         : " << rt << endl;
-        cout << "Drug ID             : " << did << endl;
-        cout << "Drug Name           : " << dn << endl;
-        cout << "Drug Description    : " << dd << endl;
-        cout << "Illness             : " << ill << endl;
-        cout << "Diagnosis           : " << dia << endl;
-
+        cout << "\n  " << BOLD << MAGENTA << "--- Record #" << count << " ---" << RESET << "\n";
+        cout << "  " << CYAN << "Patient ID         : " << RESET << pid << "\n";
+        cout << "  " << CYAN << "Patient Name       : " << RESET << pn << "\n";
+        cout << "  " << CYAN << "Patient Age        : " << RESET << pa << "\n";
+        cout << "  " << CYAN << "Record Date        : " << RESET << rd << "\n";
+        cout << "  " << CYAN << "Record Time        : " << RESET << rt << "\n";
+        cout << "  " << CYAN << "Drug ID            : " << RESET << did << "\n";
+        cout << "  " << CYAN << "Drug Name          : " << RESET << dn << "\n";
+        cout << "  " << CYAN << "Drug Description   : " << RESET << dd << "\n";
+        cout << "  " << CYAN << "Illness            : " << RESET << ill << "\n";
+        cout << "  " << CYAN << "Diagnosis          : " << RESET << dia << "\n";
 
         count++;
     }
 
     patrecord.close();
 
-    cout << "\n-----------------------------------------------------" << endl;
-    system("pause");
+    if(!hasRecords)
+    {
+        cout << "\n  " << RED << "[INFO]" << RESET << " No active records found.\n";
+    }
+
+    pauseScreen();
 }
 
-
-//function for patient to view their own record
+/*
+ * Patient View Record
+ */
 void Record::viewpatientRecord()
 {
     string searchID;
-
-    string pid, pn, pa, rd, rt, did, dn, dd, ill, dia;
-
     char cont;
-
 
     do
     {
+        clearScreen();
+        displayHeader("PATIENT VIEW - MY MEDICAL RECORD");
 
-        system("cls");
-
-        cout << "=====================================================" << endl;
-        cout << "    SMARTHEALTH SYSTEM (Patient View)    " << endl;
-        cout << "=====================================================" << endl;
-
-        cout << "\n------------------View My Record--------------------\n";
-
-
-        cout << "\nEnter your Patient ID";
-        cout << "\n>> ";
+        cout << "\n  " << CYAN << "> Enter your Patient ID: " << RESET;
         cin >> searchID;
 
-        ifstream patrecord("Record.txt");
+        ifstream patrecord("data/Record.txt");
 
         if(!patrecord)
         {
-            cout << "\nSorry but there is no record available.\n";
-            system("pause");
+            cout << "\n  " << RED << "[ERROR]" << RESET << " Sorry, but there is no record available.\n";
+            pauseScreen();
             return;
         }
 
-
+        string pid, pn, pa, rd, rt, did, dn, dd, ill, dia;
         bool found = false;
-
 
         while(getline(patrecord, pid))
         {
-
             getline(patrecord, pn);
             getline(patrecord, pa);
             getline(patrecord, rd);
@@ -670,55 +566,50 @@ void Record::viewpatientRecord()
             getline(patrecord, ill);
             getline(patrecord, dia);
 
+            string emptyLine;
+            getline(patrecord, emptyLine);
+
             if(pid == searchID)
             {
-
                 found = true;
 
-                cout << "\n-----------------------------------------------\n";
-                cout << "             My Medical Record                 ";
-                cout << "\n-----------------------------------------------\n";
-
-                cout << "Patient ID          : " << pid << endl;
-                cout << "Patient Name        : " << pn << endl;
-                cout << "Patient Age         : " << pa << endl;
-                cout << "Record Date         : " << rd << endl;
-                cout << "Record Time         : " << rt << endl;
-                cout << "Drug ID             : " << did << endl;
-                cout << "Drug Name           : " << dn << endl;
-                cout << "Drug Description    : " << dd << endl;
-                cout << "Illness             : " << ill << endl;
-                cout << "Diagnosis           : " << dia << endl;
+                cout << "\n  " << BOLD << MAGENTA << "--- My Medical Record ---" << RESET << "\n";
+                cout << "  " << CYAN << "Patient ID         : " << RESET << pid << "\n";
+                cout << "  " << CYAN << "Patient Name       : " << RESET << pn << "\n";
+                cout << "  " << CYAN << "Patient Age        : " << RESET << pa << "\n";
+                cout << "  " << CYAN << "Record Date        : " << RESET << rd << "\n";
+                cout << "  " << CYAN << "Record Time        : " << RESET << rt << "\n";
+                cout << "  " << CYAN << "Drug ID            : " << RESET << did << "\n";
+                cout << "  " << CYAN << "Drug Name          : " << RESET << dn << "\n";
+                cout << "  " << CYAN << "Drug Description   : " << RESET << dd << "\n";
+                cout << "  " << CYAN << "Illness            : " << RESET << ill << "\n";
+                cout << "  " << CYAN << "Diagnosis          : " << RESET << dia << "\n";
 
                 break;
             }
-
         }
 
         patrecord.close();
 
         if(!found)
         {
-            cout << "\nSorry, no record found for Patient ID: "
-                 << searchID << endl;
+            cout << "\n  " << RED << "[ERROR]" << RESET << " Sorry, no record found for Patient ID: " << searchID << "\n";
         }
 
-        cout << "\n\nDo you want to continue? [Y/N]";
-        cout << "\n>> ";
+        cout << "\n  " << YELLOW << "-> Do you want to continue? [Y/N]: " << RESET;
         cin >> cont;
 
+    } while(cont == 'Y' || cont == 'y');
 
-
-    }while(cont == 'Y' || cont == 'y');
-
-
-
-    system("pause");
+    pauseScreen();
 }
 
+/*
+ * Check Exist Patient ID (Const version)
+ */
 bool checkExistpatientID(const string& patientID)
 {
-    ifstream patrecord("Record.txt");
+    ifstream patrecord("data/Record.txt");
 
     if(!patrecord)
     {
@@ -728,22 +619,21 @@ bool checkExistpatientID(const string& patientID)
     string pid;
     string temp;
 
-
     while(getline(patrecord, pid))
     {
-
         for(int i = 0; i < 9; i++)
         {
             getline(patrecord, temp);
         }
 
+        string emptyLine;
+        getline(patrecord, emptyLine);
 
         if(pid == patientID)
         {
             patrecord.close();
             return true;
         }
-
     }
 
     patrecord.close();
