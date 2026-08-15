@@ -1,12 +1,14 @@
 /*
  * Patient Class Implementation
- * SmartHealth System
+ * SmartHealth System 
  */
 
 #include <iostream>
 #include <string>
 #include <conio.h>
 #include <fstream>
+#include <iomanip>
+#include <limits>
 
 #include "patient.h"
 #include "bool.h"
@@ -16,6 +18,53 @@
 
 using namespace std;
 
+// ANSI Color Palette (Modern Dark Theme Styling)
+const string RESET = "\033[0m";
+const string BOLD = "\033[1m";
+const string DIM = "\033[2m";
+const string CYAN = "\033[36m";
+const string BLUE = "\033[34m";
+const string GREEN = "\033[32m";
+const string YELLOW = "\033[33m";
+const string RED = "\033[31m";
+const string MAGENTA = "\033[35m";
+
+void clearScreen()
+{
+#ifdef _WIN32
+    system("cls");
+#else
+    system("clear");
+#endif
+}
+
+void pauseScreen()
+{
+    cout << "\n  " << DIM << "Press [ENTER] to continue..." << RESET;
+    cin.ignore(numeric_limits<streamsize>::max(), '\n');
+    cin.get();
+}
+
+// Modern Dashboard Header Card
+void displayHeader(string subtitle)
+{
+    cout << CYAN << BOLD << "\n  ======================================================\n";
+    cout << "   SMARTHEALTH CLINICAL MANAGEMENT SYSTEM v2.6          \n";
+    cout << "   " << BLUE << left << setw(50) << subtitle << CYAN << " |\n";
+    cout << "  ======================================================\n" << RESET;
+}
+
+int getChoice()
+{
+    int choice;
+    cout << "\n  " << YELLOW << "-> Enter selection: " << RESET;
+    if (!(cin >> choice)) {
+        cin.clear();
+        cin.ignore(numeric_limits<streamsize>::max(), '\n');
+        return -1;
+    }
+    return choice;
+}
 
 // Global objects
 Appointment app;
@@ -25,20 +74,15 @@ Record re;
 /*
  * Constructor
  */
-
-
 Patient::Patient()
 {
-
     patientID = "";
     patientName = "";
     patientAge = "";
     patientAddress = "";
     phone = "";
     medicalHistory = "";
-
 }
-
 
 /*
  * Setter Functions
@@ -68,12 +112,10 @@ void Patient::setphone(string ph)
     phone = ph;
 }
 
-
 void Patient::setmedicalHistory(string mh)
 {
     medicalHistory = mh;
 }
-
 
 /*
  * Getter Functions
@@ -108,833 +150,422 @@ string Patient::getmedicalHistory()
     return medicalHistory;
 }
 
-
 /*
  * Patient Registration
  */
 void Patient::registration()
 {
+    clearScreen();
+    displayHeader("PATIENT REGISTRATION");
 
-    string usernameCheck;
-
-    cout
-    << "\n=====================================================\n";
-
-    cout
-    << " SMARTHEALTH SYSTEM\n";
-
-    cout
-    << " Patient Registration\n";
-
-    cout
-    << "=====================================================\n";
-
-    cin.ignore();
+    cin.ignore(numeric_limits<streamsize>::max(), '\n');
 
     /*
      * Username validation
      */
     while(true)
     {
+        cout << "\n  " << CYAN << "> Username     : " << RESET;
+        getline(cin, username);
 
-        cout
-        << "\nUsername : ";
-
-        getline(
-            cin,
-            username
-        );
-
-        ifstream checkFile(
-            "data/PatientRegistration.txt"
-        );
-
+        ifstream checkFile("data/PatientRegistration.txt");
         bool exist = false;
-
         string line;
 
-
-        while(getline(checkFile,line))
+        while(getline(checkFile, line))
         {
-
             if(line == username)
             {
-
                 exist = true;
-
                 break;
-
             }
 
             // skip remaining 8 fields
-
-            for(int i=0;i<8;i++)
+            for(int i = 0; i < 8; i++)
             {
-
-                getline(checkFile,line);
-
+                getline(checkFile, line);
             }
-
         }
 
         checkFile.close();
 
         if(exist)
         {
-
-            cout
-            << "\nUsername already exists. Try another one.";
-
+            cout << "  " << RED << "[ERROR]" << RESET << " Username already exists. Try another one.\n";
         }
-
         else
         {
-
             break;
-
         }
-
     }
 
+    cout << "  " << CYAN << "> Password     : " << RESET;
+    getline(cin, password);
 
-    cout
-    << "Password : ";
+    cout << "  " << CYAN << "> Patient ID   : " << RESET;
+    getline(cin, patientID);
 
-    getline(
-        cin,
-        password
-    );
+    cout << "  " << CYAN << "> Patient Name : " << RESET;
+    getline(cin, patientName);
 
-    cout
-    << "Patient ID : ";
+    cout << "  " << CYAN << "> Patient Age  : " << RESET;
+    getline(cin, patientAge);
 
-    getline(
-        cin,
-        patientID
-    );
-
-    cout
-    << "Patient Name : ";
-
-    getline(
-        cin,
-        patientName
-    );
-
-    cout
-    << "Patient Age : ";
-
-    getline(
-        cin,
-        patientAge
-    );
-
-    cout
-    << "Address : ";
-
-    getline(
-        cin,
-        patientAddress
-    );
-
+    cout << "  " << CYAN << "> Address      : " << RESET;
+    getline(cin, patientAddress);
 
     /*
      * Email validation
      */
     while(true)
     {
-
-        cout
-        << "Email : ";
-
-        getline(
-            cin,
-            email
-        );
+        cout << "  " << CYAN << "> Email        : " << RESET;
+        getline(cin, email);
 
         if(checkEmail(email))
         {
-
             break;
-
         }
 
-        cout
-        << "\nInvalid email format.\n";
-
+        cout << "  " << RED << "[ERROR]" << RESET << " Invalid email format.\n";
     }
-
 
     /*
      * Phone validation
      */
-
-
     while(true)
     {
+        cout << "  " << CYAN << "> Phone Number : " << RESET;
+        getline(cin, phone);
 
-        cout
-        << "Phone Number : ";
-
-        getline(
-            cin,
-            phone
-        );
-
-
-        if(
-            checkMobile(
-                phone,
-                phone.length()
-            )
-          )
+        if(checkMobile(phone, phone.length()))
         {
-
             break;
-
         }
 
-        cout
-        << "\nInvalid phone number.\n";
-
+        cout << "  " << RED << "[ERROR]" << RESET << " Invalid phone number.\n";
     }
 
-    cout
-    << "Medical History : ";
+    cout << "  " << CYAN << "> Medical Hist : " << RESET;
+    getline(cin, medicalHistory);
 
-    getline(
-        cin,
-        medicalHistory
-    );
-
-
-    ofstream patientFile(
-        "data/PatientRegistration.txt",
-        ios::app
-    );
+    ofstream patientFile("data/PatientRegistration.txt", ios::app);
 
     if(!patientFile)
     {
-        cout
-        << "\nUnable to save registration.";
-
+        cout << "\n  " << RED << "[ERROR]" << RESET << " Unable to save registration data.\n";
+        pauseScreen();
         return;
-
     }
 
-    patientFile
-
-    << username << endl
-    << password << endl
-    << patientID << endl
-    << patientName << endl
-    << patientAge << endl
-    << patientAddress << endl
-    << email << endl
-    << phone << endl
-    << medicalHistory << endl
-
-    << endl;
+    patientFile << username << endl
+                << password << endl
+                << patientID << endl
+                << patientName << endl
+                << patientAge << endl
+                << patientAddress << endl
+                << email << endl
+                << phone << endl
+                << medicalHistory << endl
+                << endl;
 
     patientFile.close();
 
-    cout
-    << "\nRegistration successful.";
-
+    cout << "\n  " << GREEN << "[SUCCESS]" << RESET << " Patient registration successful.\n";
+    pauseScreen();
 }
-
 
 /*
  * Patient Login
  */
-
 void Patient::login()
 {
-    cout
-    << "\n=====================================================\n";
+    clearScreen();
+    displayHeader("PATIENT AUTHENTICATION");
 
-    cout
-    << " SMARTHEALTH SYSTEM\n";
+    cin.ignore(numeric_limits<streamsize>::max(), '\n');
 
-    cout
-    << " Patient Login\n";
+    cout << "\n  " << BOLD << "Please enter your portal credentials:" << RESET << "\n";
+    cout << "  " << CYAN << "> Username : " << RESET;
+    getline(cin, username);
 
-    cout
-    << "=====================================================\n";
+    cout << "  " << CYAN << "> Password : " << RESET;
+    getline(cin, password);
 
-
-    cin.ignore();
-
-    cout
-    << "\nUsername : ";
-
-
-    getline(
-        cin,
-        username
-    );
-
-    cout
-    << "Password : ";
-
-
-    getline(
-        cin,
-        password
-    );
-
-
-    if(
-        !validateLogin(
-            username,
-            password
-        )
-      )
+    if(!validateLogin(username, password))
     {
-
-        cout
-        << "\nInvalid username or password.";
-
-        system("pause");
-
+        cout << "\n  " << RED << "[ERROR]" << RESET << " Invalid username or password.\n";
+        pauseScreen();
         return;
-
     }
-
 
     /*
      * Load patient information
      */
-    ifstream patientFile(
-        "data/PatientRegistration.txt"
-    );
-
+    ifstream patientFile("data/PatientRegistration.txt");
     string user;
 
-    while(getline(patientFile,user))
+    while(getline(patientFile, user))
     {
-
         string pass;
+        getline(patientFile, pass);
 
-
-        getline(
-            patientFile,
-            pass
-        );
-
-        if(
-            user == username &&
-            pass == password
-          )
+        if(user == username && pass == password)
         {
-            getline(patientFile,patientID);
-            getline(patientFile,patientName);
-            getline(patientFile,patientAge);
-            getline(patientFile,patientAddress);
-            getline(patientFile,email);
-            getline(patientFile,phone);
-            getline(patientFile,medicalHistory);
-
+            getline(patientFile, patientID);
+            getline(patientFile, patientName);
+            getline(patientFile, patientAge);
+            getline(patientFile, patientAddress);
+            getline(patientFile, email);
+            getline(patientFile, phone);
+            getline(patientFile, medicalHistory);
             break;
-
         }
-
         else
         {
             // skip current user data
-            for(int i=0;i<7;i++)
+            for(int i = 0; i < 7; i++)
             {
-
-                getline(
-                    patientFile,
-                    user
-                );
-
+                getline(patientFile, user);
             }
-
         }
-
     }
-
 
     patientFile.close();
 
-    cout
-    << "\nWelcome "
-    << username
-    << "! Login successful.";
-
-    system("pause");
+    cout << "\n  " << GREEN << "[SUCCESS]" << RESET << " Welcome " << BOLD << username << RESET << "! Login successful.\n";
+    pauseScreen();
     patientPlatform();
-
 }
 
- /*
-  * Patient Menu
-  */
+/*
+ * Patient Menu
+ */
 void Patient::patientPlatform()
 {
-
     int option;
-
     Appointment app;
-	Payment pay;
-	Record re;
+    Payment pay;
+    Record re;
 
     while(true)
     {
+        clearScreen();
+        displayHeader("PORTAL / PATIENT DASHBOARD");
 
+        cout << "\n  " << BOLD << "Welcome back, " << CYAN << username << RESET << "!\n";
+        cout << "\n  " << BOLD << "PATIENT OPTIONS:" << RESET << "\n";
+        cout << "  " << MAGENTA << "[1]" << RESET << " View Profile\n";
+        cout << "  " << MAGENTA << "[2]" << RESET << " Edit Profile\n";
+        cout << "  " << MAGENTA << "[3]" << RESET << " Set Appointment\n";
+        cout << "  " << MAGENTA << "[4]" << RESET << " View Medical Record\n";
+        cout << "  " << MAGENTA << "[5]" << RESET << " Make Payment\n";
+        cout << "\n  " << DIM << "[6] Logout / Return" << RESET << "\n";
 
-        system("cls");
-
-        cout
-        << "\n=================================================\n";
-
-        cout
-        << " SMARTHEALTH SYSTEM\n";
-
-        cout
-        << " Patient Menu\n";
-
-        cout
-        << "=================================================\n";
-
-        cout
-        << "\nWelcome "
-        << username
-        << "!";
-
-        cout
-        << "\n\n1. View Profile";
-
-        cout
-        << "\n2. Edit Profile";
-
-        cout
-        << "\n3. Set Appointment";
-
-        cout
-        << "\n4. View Medical Record";
-
-        cout
-        << "\n5. Make Payment";
-
-        cout
-        << "\n6. Logout";
-
-        cout
-        << "\n\nSelect option: ";
-
-        cin
-        >> option;
+        option = getChoice();
 
         switch(option)
         {
-
         case 1:
-
             viewProfile();
             break;
 
         case 2:
-
             editProfile();
             break;
 
         case 3:
-
             app.appMenu();
             break;
 
         case 4:
-
-            system("cls");
+            clearScreen();
+            displayHeader("PATIENT MEDICAL RECORD");
             re.viewpatientRecord();
-            system("pause");
+            pauseScreen();
             break;
 
         case 5:
-        {
-
-            system("cls");
+            clearScreen();
+            displayHeader("PROCESS PAYMENT");
             pay.makePayment();
-            system("pause");
+            pauseScreen();
             break;
-
-        }
 
         case 6:
         {
-
             char confirm;
+            cout << "\n  " << YELLOW << "-> Logout? (Y/N): " << RESET;
+            cin >> confirm;
 
-            cout
-            << "\nLogout? (Y/N): ";
-
-            cin
-            >> confirm;
-
-            if(
-                confirm == 'Y' ||
-                confirm == 'y'
-              )
+            if(confirm == 'Y' || confirm == 'y')
             {
-
                 return;
-
             }
-
             break;
-
         }
 
         default:
-
-            cout
-            << "\nInvalid option.";
-
-            system("pause");
-
+            cout << "\n  " << RED << "[ERROR]" << RESET << " Invalid option. Please choose [1-6].\n";
+            pauseScreen();
         }
-
     }
-
 }
-
 
 /*
  * View Patient Profile
  */
 void Patient::viewProfile()
 {
-    system("cls");
+    clearScreen();
+    displayHeader("PATIENT PROFILE DETAILS");
 
+    cout << "\n  " << BOLD << "ACCOUNT INFORMATION:" << RESET << "\n";
+    cout << "  " << CYAN << "Username        : " << RESET << username << "\n";
+    cout << "  " << CYAN << "Password        : " << RESET << password << "\n";
+    cout << "  " << CYAN << "Patient ID      : " << RESET << patientID << "\n";
 
-    cout
-    << "\n=================================================\n";
+    cout << "\n  " << BOLD << "PERSONAL INFORMATION:" << RESET << "\n";
+    cout << "  " << CYAN << "Patient Name    : " << RESET << patientName << "\n";
+    cout << "  " << CYAN << "Patient Age     : " << RESET << patientAge << "\n";
+    cout << "  " << CYAN << "Address         : " << RESET << patientAddress << "\n";
+    cout << "  " << CYAN << "Email           : " << RESET << email << "\n";
+    cout << "  " << CYAN << "Phone Number    : " << RESET << phone << "\n";
+    cout << "  " << CYAN << "Medical History : " << RESET << medicalHistory << "\n";
 
-    cout
-    << " Patient Profile\n";
-
-    cout
-    << "=================================================\n";
-
-    cout
-    << "\nUsername          : "
-    << username;
-
-    cout
-    << "\nPassword          : "
-    << password;
-
-    cout
-    << "\nPatient ID        : "
-    << patientID;
-
-    cout
-    << "\nPatient Name      : "
-    << patientName;
-
-    cout
-    << "\nPatient Age       : "
-    << patientAge;
-
-    cout
-    << "\nAddress           : "
-    << patientAddress;
-
-    cout
-    << "\nEmail             : "
-    << email;
-
-    cout
-    << "\nPhone             : "
-    << phone;
-
-    cout
-    << "\nMedical History   : "
-    << medicalHistory;
-
-    cout
-    << "\n=================================================\n";
-
-    system("pause");
-
+    pauseScreen();
 }
-
 
 /*
  * Edit Patient Profile
  */
 void Patient::editProfile()
 {
+    clearScreen();
+    displayHeader("EDIT PATIENT PROFILE");
 
-    system("cls");
+    string newName, newAge, newAddress, newEmail, newPhone, newHistory;
 
-    cout
-    << "\n=================================================\n";
+    cin.ignore(numeric_limits<streamsize>::max(), '\n');
 
-    cout
-    << " Edit Patient Profile\n";
+    cout << "  " << CYAN << "> Enter new patient name: " << RESET;
+    getline(cin, newName);
 
-    cout
-    << "=================================================\n";
+    cout << "  " << CYAN << "> Enter new patient age : " << RESET;
+    getline(cin, newAge);
 
-
-    string newName;
-    string newAge;
-    string newAddress;
-    string newEmail;
-    string newPhone;
-    string newHistory;
-
-    cout
-    << "\nEnter new patient name: ";
-
-    cin.ignore();
-
-    getline(
-        cin,
-        newName
-    );
-
-    cout
-    << "Enter new patient age: ";
-
-    getline(
-        cin,
-        newAge
-    );
-
-
-    cout
-    << "Enter new address: ";
-
-    getline(
-        cin,
-        newAddress
-    );
-
+    cout << "  " << CYAN << "> Enter new address     : " << RESET;
+    getline(cin, newAddress);
 
     /*
      * Email validation
      */
-
-
     while(true)
     {
+        cout << "  " << CYAN << "> Enter new email       : " << RESET;
+        getline(cin, newEmail);
 
-        cout
-        << "Enter new email: ";
-
-
-        getline(
-            cin,
-            newEmail
-        );
-
-
-        if(
-            checkEmail(newEmail)
-          )
+        if(checkEmail(newEmail))
         {
-
             break;
-
         }
 
-
-
-        cout
-        << "\nInvalid email format.\n";
-
+        cout << "  " << RED << "[ERROR]" << RESET << " Invalid email format.\n";
     }
-
 
     /*
      * Phone validation
      */
-
-
     while(true)
     {
+        cout << "  " << CYAN << "> Enter new phone number: " << RESET;
+        getline(cin, newPhone);
 
-        cout
-        << "Enter new phone number: ";
-
-
-        getline(
-            cin,
-            newPhone
-        );
-
-
-        if(
-            checkMobile(
-                newPhone,
-                newPhone.length()
-            )
-          )
+        if(checkMobile(newPhone, newPhone.length()))
         {
-
             break;
-
         }
 
-
-        cout
-        << "\nInvalid phone number.\n";
-
+        cout << "  " << RED << "[ERROR]" << RESET << " Invalid phone number.\n";
     }
 
-
-    cout
-    << "Enter medical history: ";
-
-
-    getline(
-        cin,
-        newHistory
-    );
-
+    cout << "  " << CYAN << "> Enter medical history : " << RESET;
+    getline(cin, newHistory);
 
     char confirm;
+    cout << "\n  " << YELLOW << "-> Confirm profile update? (Y/N): " << RESET;
+    cin >> confirm;
 
-
-
-    cout
-    << "\nConfirm update? (Y/N): ";
-
-
-    cin
-    >> confirm;
-
-
-    if(
-        confirm != 'Y' &&
-        confirm != 'y'
-      )
+    if(confirm != 'Y' && confirm != 'y')
     {
-
-
-        cout
-        << "\nUpdate cancelled.";
-
-
-        system("pause");
-
-
+        cout << "\n  " << RED << "[INFO]" << RESET << " Update cancelled.\n";
+        pauseScreen();
         return;
-
     }
-
 
     /*
      * Read old file
      */
-    ifstream oldFile(
-        "data/PatientRegistration.txt"
-    );
-
-
-    ofstream tempFile(
-        "data/tempPatient.txt"
-    );
-
+    ifstream oldFile("data/PatientRegistration.txt");
+    ofstream tempFile("data/tempPatient.txt");
     string line;
 
-    while(getline(oldFile,line))
+    while(getline(oldFile, line))
     {
-
-
         string oldUsername = line;
+        string oldPassword, oldID, oldName, oldAge, oldAddress, oldEmail, oldPhone, oldHistory;
 
-        string oldPassword;
-        string oldID;
-        string oldName;
-        string oldAge;
-        string oldAddress;
-        string oldEmail;
-        string oldPhone;
-        string oldHistory;
-
-
-        getline(oldFile,oldPassword);
-        getline(oldFile,oldID);
-        getline(oldFile,oldName);
-        getline(oldFile,oldAge);
-        getline(oldFile,oldAddress);
-        getline(oldFile,oldEmail);
-        getline(oldFile,oldPhone);
-        getline(oldFile,oldHistory);
+        getline(oldFile, oldPassword);
+        getline(oldFile, oldID);
+        getline(oldFile, oldName);
+        getline(oldFile, oldAge);
+        getline(oldFile, oldAddress);
+        getline(oldFile, oldEmail);
+        getline(oldFile, oldPhone);
+        getline(oldFile, oldHistory);
 
         if(oldUsername == username)
         {
-
-
-            tempFile
-
-            << username << endl
-            << password << endl
-            << patientID << endl
-            << newName << endl
-            << newAge << endl
-            << newAddress << endl
-            << newEmail << endl
-            << newPhone << endl
-            << newHistory << endl
-
-            << endl;
+            tempFile << username << endl
+                     << password << endl
+                     << patientID << endl
+                     << newName << endl
+                     << newAge << endl
+                     << newAddress << endl
+                     << newEmail << endl
+                     << newPhone << endl
+                     << newHistory << endl
+                     << endl;
 
             // update current object
-
             patientName = newName;
             patientAge = newAge;
             patientAddress = newAddress;
             email = newEmail;
             phone = newPhone;
             medicalHistory = newHistory;
-
         }
-
         else
         {
-
-            tempFile
-
-            << oldUsername << endl
-            << oldPassword << endl
-            << oldID << endl
-            << oldName << endl
-            << oldAge << endl
-            << oldAddress << endl
-            << oldEmail << endl
-            << oldPhone << endl
-            << oldHistory << endl
-
-            << endl;
-
+            tempFile << oldUsername << endl
+                     << oldPassword << endl
+                     << oldID << endl
+                     << oldName << endl
+                     << oldAge << endl
+                     << oldAddress << endl
+                     << oldEmail << endl
+                     << oldPhone << endl
+                     << oldHistory << endl
+                     << endl;
         }
-
     }
 
     oldFile.close();
     tempFile.close();
 
+    remove("data/PatientRegistration.txt");
+    rename("data/tempPatient.txt", "data/PatientRegistration.txt");
 
-    remove(
-        "data/PatientRegistration.txt"
-    );
-
-    rename(
-        "data/tempPatient.txt",
-        "data/PatientRegistration.txt"
-    );
-
-
-    cout
-    << "\nProfile updated successfully.";
-
-    system("pause");
-
+    cout << "\n  " << GREEN << "[SUCCESS]" << RESET << " Profile updated successfully.\n";
+    pauseScreen();
 }
