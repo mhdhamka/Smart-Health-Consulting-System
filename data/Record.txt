@@ -1,0 +1,32 @@
+PAT001
+Mohammad Hamka
+23
+05/01/2026
+0900
+DRG001
+Paracetamol
+Take 2 tablets after meal
+Fever and headache
+Mild fever caused by infection
+
+PAT002
+Amir Alam
+24
+06/01/2026
+1000
+DRG002
+Ventolin
+Use inhaler when needed
+Asthma
+Respiratory problem
+
+PAT003
+Faizatul Fitri
+22
+07/01/2026
+1100
+DRG003
+Cetirizine
+Take once daily before sleep
+Allergy
+Skin allergy reaction

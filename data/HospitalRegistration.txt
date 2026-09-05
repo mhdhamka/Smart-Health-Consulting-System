@@ -1,0 +1,11 @@
+admin01
+10024
+Harmony General Hospital
+
+admin02
+20025
+Borneo Specialist Hospital
+
+admin03
+30026
+NovaCare Medical Centre

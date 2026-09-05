@@ -1,135 +1,268 @@
-# Smart Health Consulting System
+<div align="center">
 
-A console-based healthcare management system developed in **C++** as part of an Object-Oriented Software Development course.
+# SmartHealth System
 
-The application demonstrates fundamental Object-Oriented Programming (OOP) concepts including:
+A console-based healthcare management system developed in **C++** as part of an **Object-Oriented Software Development course**.
+
+![Language](https://img.shields.io/badge/Language-C%2B%2B-blue)
+![Compiler](https://img.shields.io/badge/Compiler-GCC-orange)
+![Environment](https://img.shields.io/badge/Environment-MSYS2%20UCRT64-purple)
+![Platform](https://img.shields.io/badge/Platform-Console-success)
+![Programming](https://img.shields.io/badge/Programming-OOP-green)
+
+</div>
+
+---
+
+This project was originally developed as an academic coursework project and has been **restructured and enhanced** to improve code organization, maintainability, and software development practices.
+
+The system demonstrates fundamental **Object-Oriented Programming (OOP)** concepts, including:
 
 - Classes and Objects
-- Inheritance
 - Encapsulation
+- Inheritance
 - File Handling
 - Input Validation
 - Modular Programming using Header Files
+- Separation of Source and Header Files
 
 ---
 
-## Features
+# Features
 
+## Patient Module
 - Patient Registration
 - Patient Login
+- View Patient Profile
+- Update Patient Profile
+- View Medical Records
+
+## Doctor Module
 - Doctor Login
-- Hospital Administrator Login
+- View Patient Records
+- Add Medical Records
+- Edit Medical Records
+- Remove Medical Records
+
+## Hospital Administrator Module
+- Administrator Login
+- Manage Hospital Information
+
+## Appointment & Consultation Module
+- Appointment Booking
 - Appointment Management
-- Patient Record Management
 - Consultation Services
+- Payment Management
+
+## System Features
 - File-based Data Storage
 - Input Validation
+- Modular Program Structure
+- Console-based User Interface
 
 ---
 
-## Technologies Used
-
-- C++
-- Visual Studio Code
-- GCC / MinGW Compiler
-- Object-Oriented Programming
-
----
-
-## Project Structure
+# Project Structure
 
 ```
-.
-├── main.cpp
-├── Doctor.cpp
-├── Doctor.h
-├── Patient.cpp
-├── Patient.h
-├── Appointment.cpp
-├── Appointment.h
-├── Consultation.cpp
-├── Consultation.h
-├── bool.h
-├── PatientRegistration.txt
+SmartHealth-System
+│
+├── include
+│   ├── appointment.h
+│   ├── bool.h
+│   ├── doctor.h
+│   ├── hospital.h
+│   ├── patient.h
+│   ├── payment.h
+│   ├── record.h
+│   └── user.h
+│
+├── src
+│   ├── main.cpp
+│   ├── appointment.cpp
+│   ├── bool.cpp
+│   ├── doctor.cpp
+│   ├── hospital.cpp
+│   ├── patient.cpp
+│   ├── payment.cpp
+│   ├── record.cpp
+│   └── user.cpp
+│
+├── data
+│   ├── PatientRegistration.txt
+│   ├── Appointment.txt
+│   ├── Record.txt
+│   └── Payment.txt
+│
 └── README.md
 ```
 
 ---
 
-## How to Run
+# Technologies Used
 
-### Option 1: Visual Studio Code (Recommended)
+- **Programming Language:** C++
+- **Compiler:** GCC (MinGW-w64)
+- **Development Environment:** Visual Studio Code
+- **Build Environment:** MSYS2 UCRT64
+- **Programming Paradigm:** Object-Oriented Programming (OOP)
+- **Storage Method:** Text File-Based Database
 
-### Requirements
+---
+
+# Development Environment Setup
+
+This project is developed and tested using:
+
+## MSYS2 UCRT64 Environment
+
+MSYS2 provides a Unix-like development environment on Windows with the UCRT64 toolchain for compiling C++ applications.
+
+### Required Software
 
 - Visual Studio Code
 - C/C++ Extension
-- MinGW-w64 (GCC)
+- MSYS2
+- UCRT64 GCC Compiler
 
-Compile:
 
-```bash
-g++ *.cpp -o SmartHealthSystem
-```
+### Install GCC Compiler
 
-Run:
+Open MSYS2 UCRT64 terminal:
 
 ```bash
-./SmartHealthSystem
+pacman -S mingw-w64-ucrt-x86_64-gcc
 ```
 
-On Windows Command Prompt:
+Verify compiler installation:
 
 ```bash
-SmartHealthSystem.exe
+g++ --version
 ```
 
 ---
 
-### Option 2: Dev-C++
+# How to Run
 
-1. Open the project.
-2. Go to **Project → Project Options**.
-3. Select **Settings → Code Generation**.
-4. Set the language standard to **GNU C++11**.
-5. Compile and Run.
+## Option 1: Visual Studio Code + MSYS2 UCRT64 (Recommended)
 
----
+### Clone Repository
 
-## Login Credentials
+```bash
+git clone https://github.com/mhdhamka/SmartHealth-System.git
+```
 
-### Doctor
+Navigate to project folder:
 
-| Username | Password |
-|----------|----------|
-| PDC1365 | 74251 |
-
-### Hospital Administrator
-
-| Username | Password |
-|----------|----------|
-| ain2022 | 73779 |
+```bash
+cd SmartHealth-System
+```
 
 ---
 
-## Notes
+## Compile Program
 
-- Keep all `.cpp`, `.h`, and `.txt` files in the same directory.
-- `PatientRegistration.txt` contains sample patient data.
-- You may edit the file to create additional test accounts.
+Run the following command from the project root directory:
+
+```bash
+g++ src/*.cpp -Iinclude -o SmartHealth.exe
+```
+
+### Compilation Explanation
+
+```
+src/*.cpp
+```
+
+Compile all C++ source files inside the `src` folder.
+
+```
+-Iinclude
+```
+
+Specify the location of header files.
+
+```
+-o SmartHealth.exe
+```
+
+Generate the executable file.
 
 ---
 
-## Group Members
+## Run Program
 
-- Azreen Shafieqah binti Asri
-- Mohammad Hamka Izzudin bin Mohammad Yahya
-- Mohammad Amir Alam bin Rahim Omar
-- Nurulain Basirah binti Hamid
-- Iman Tarmizi Rosalina
+Using MSYS2 UCRT64:
+
+```bash
+./SmartHealth.exe
+```
+
+Using Windows Command Prompt:
+
+```cmd
+SmartHealth.exe
+```
 
 ---
 
-## License
+# Default Login Credentials
 
-This project was developed for educational purposes.
+## Doctor Account
+
+```
+Username : PDC1365
+Password : 74251
+
+Doctor Name : Lamine Hamka
+Specialization : Paediatric
+```
+
+---
+
+## Hospital Administrator Account
+
+```
+Username : Marc Cucurella
+Password : 10024
+
+Hospital Name : Nurulain Basirah
+```
+
+---
+
+# Notes
+
+- The project uses `.cpp` files for class implementation and `.h` files for class declarations.
+- All system data is stored locally using text files inside the `data` folder.
+- Run the program from the project root directory to ensure file paths work correctly.
+- The system is designed for educational purposes and demonstrates basic software development practices.
+
+---
+
+# Project Restructuring and Improvements
+
+The original coursework version was restructured and improved by:
+
+- Organizing source files into separate `src` and `include` directories
+- Improving class organization and modularity
+- Removing duplicated code
+- Improving file handling methods
+- Updating compilation workflow using MSYS2 UCRT64
+- Improving project documentation
+- Enhancing maintainability and readability
+
+---
+
+# License
+
+This project was developed for **educational and personal software development purposes**.
+
+The original version was created as part of an academic project, while this enhanced version was independently restructured to practice:
+
+- Object-Oriented Programming
+- Modular Software Design
+- File-Based Data Management
+- C++ Application Development
+
+---
