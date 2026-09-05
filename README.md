@@ -149,7 +149,7 @@ g++ --version
 ### Clone Repository
 
 ```bash
-git clone <repository-url>
+git clone https://github.com/mhdhamka/SmartHealth-System.git
 ```
 
 Navigate to project folder:
